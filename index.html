@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Alex Guerrero — Systems and Product Designer in Madrid." />
+    <title>Alex Guerrero — Systems and Product Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=3" />
+  </head>
+  <body>
+    <div class="portfolio">
+      <header class="topbar">
+        <nav class="section-nav" aria-label="Main navigation">
+          <a class="section-tab is-active" href="#work" data-page="work" aria-current="page">Work</a>
+          <a class="section-tab" href="#about" data-page="about">About</a>
+          <a class="section-tab" href="#love" data-page="love">Things I love</a>
+        </nav>
+
+        <div class="identity avatar-frame">
+          <button class="avatar-button" type="button" aria-label="Open about panel" aria-haspopup="dialog" aria-expanded="false" aria-controls="about-panel">
+            <video src="assets/alex-memoji.MOV" autoplay loop muted playsinline aria-hidden="true"></video>
+          </button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <button class="project-step project-step-previous" type="button" aria-label="Previous project" data-project-control hidden>
+          <span class="project-step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+          </span>
+        </button>
+        <section class="content-page work-page" id="work" data-content="work" aria-label="Work">
+          <div class="stage">
+            <div class="preview" role="group" aria-label="Personio Design System project preview">
+              <span class="preview-index" aria-hidden="true">01</span>
+              <div class="preview-art art-personio" aria-hidden="true">
+                <div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div>
+                <div class="art-side"><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <button class="project-step project-step-next" type="button" aria-label="Next project" data-project-control hidden>
+          <span class="project-step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </span>
+        </button>
+
+        <section class="content-page about-page" id="about" data-content="about" aria-label="About" hidden>
+          <div class="text-page">
+            <h1>Systems and Product Designer</h1>
+            <div class="about-copy">
+              <p>Currently working as a staff product designer at Personio from sunny Madrid, owning our design system and the product architecture.</p>
+              <p>Previously worked as founding designer in BlueOptima.</p>
+            </div>
+            <div class="about-links" aria-label="More links">
+              <a href="mailto:alex@craftz.design">Get in touch</a>
+              <a href="https://www.linkedin.com/in/jamguerrero/" target="_blank" rel="noreferrer">Linkedin</a>
+              <a href="https://craftz.design" target="_blank" rel="noreferrer">Experiments</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-page love-page" id="love" data-content="love" aria-label="Things I love" hidden>
+          <div class="text-page">
+            <h1>Things I love</h1>
+            <ul class="love-list">
+              <li>Thoughtful interfaces</li>
+              <li>Design systems that make room for craft</li>
+              <li>The small details that make products feel right</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <footer class="project-footer" data-project-footer>
+        <div class="project-meta">
+          <h1>Personio Design System</h1>
+          <p>Design system and foundations for Personio.</p>
+        </div>
+      </footer>
+    </div>
+
+    <div class="about-overlay" data-about-overlay hidden>
+      <button class="about-backdrop" type="button" aria-label="Close about panel" data-about-close></button>
+      <aside class="about-panel" id="about-panel" role="dialog" aria-modal="true" aria-label="About Alex Guerrero" tabindex="-1">
+        <header class="about-panel-header">
+          <span class="about-panel-file"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><ellipse cx="12" cy="12" rx="2" ry="2" fill="#61dafb"/><ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="#61dafb" stroke-width="1.2"/><ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="#61dafb" stroke-width="1.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="#61dafb" stroke-width="1.2" transform="rotate(120 12 12)"/></svg>about.tsx</span>
+          <button class="about-close" type="button" data-about-close>close</button>
+        </header>
+        <div class="about-code-scroll">
+          <div class="about-code-wrap">
+            <div class="about-line-numbers" aria-hidden="true"></div>
+            <pre class="about-code"><span class="code-keyword">import</span> { <span class="code-name">Psychology</span>, <span class="code-name">Neuroscience</span> } <span class="code-keyword">from</span> <span class="code-value">'College'</span>;
+
+<span class="code-const">const</span> <span class="code-name">alex guerrero</span> : <span class="code-type">Designer</span> = [
+  {
+    <span class="code-key">tldr</span>: <span class="code-value">"Staff Product &amp; Systems Designer based in Madrid. Entering my design engineering era"</span>,
+
+    <span class="code-key">company</span>: <span class="code-value">"Personio"</span>,
+    <span class="code-key">role</span>: <span class="code-value">"Staff Product Designer"</span>,
+    <span class="code-key">focus</span>: <span class="code-value">"Design Systems, Architecture, Infrastructure"</span>,
+    <span class="code-key">passions</span>: <span class="code-value">"Motion, Prototyping, Photography"</span>,
+
+    <span class="code-key">stack</span>: [
+      <a href="https://www.figma.com" target="_blank" rel="noreferrer">"Figma" ↗</a>,
+      <a href="https://react.dev" target="_blank" rel="noreferrer">"React" ↗</a>,
+      <a href="https://www.typescriptlang.org" target="_blank" rel="noreferrer">"TypeScript" ↗</a>,
+      <a href="https://motion.dev" target="_blank" rel="noreferrer">"Motion" ↗</a>,
+      <a href="https://gsap.com" target="_blank" rel="noreferrer">"GSAP" ↗</a>,
+    ],
+
+    <span class="code-key">endpoints</span>: [
+      <a href="https://www.linkedin.com/in/jamguerrero/" target="_blank" rel="noreferrer">"LinkedIn" ↗</a>,
+      <a href="https://github.com/somillennial" target="_blank" rel="noreferrer">"Github" ↗</a>,
+      <a href="mailto:alex@craftz.design">"Chat" ↗</a>,
+    ],
+  },
+];</pre>
+          </div>
+        </div>
+        <footer class="about-panel-footer"><span>~/portfolio · main</span><span>deployed 2026-05-13</span></footer>
+      </aside>
+    </div>
+
+    <script>
+      const tabs = [...document.querySelectorAll(".section-tab")];
+      const pages = [...document.querySelectorAll(".content-page")];
+      const avatarButton = document.querySelector(".avatar-button");
+      const aboutOverlay = document.querySelector("[data-about-overlay]");
+      const aboutPanel = document.querySelector(".about-panel");
+      const projectControls = [...document.querySelectorAll("[data-project-control]")];
+      const projects = [
+        { title: "Personio Design System", description: "Design system and foundations for Personio." },
+        { title: "Personio Product Architecture", description: "Product architecture across Personio." },
+        { title: "BlueOptima", description: "Founding designer." },
+      ];
+      let activeProject = 0;
+      const lineNumbers = document.querySelector(".about-line-numbers");
+      lineNumbers.innerHTML = Array.from({ length: 27 }, (_, index) => `<span>${index + 1}</span>`).join("");
+
+      function showProject(index) {
+        activeProject = (index + projects.length) % projects.length;
+        const project = projects[activeProject];
+        document.querySelector(".preview-index").textContent = String(activeProject + 1).padStart(2, "0");
+        document.querySelector(".preview").setAttribute("aria-label", `${project.title} project preview`);
+        document.querySelector(".project-meta h1").textContent = project.title;
+        document.querySelector(".project-meta p").textContent = project.description;
+      }
+
+      document.querySelector(".project-step-previous").addEventListener("click", () => showProject(activeProject - 1));
+      document.querySelector(".project-step-next").addEventListener("click", () => showProject(activeProject + 1));
+
+      function setAboutOpen(open) {
+        aboutOverlay.hidden = !open;
+        avatarButton.setAttribute("aria-expanded", String(open));
+        document.body.classList.toggle("about-open", open);
+        if (open) aboutPanel.focus();
+        else avatarButton.focus();
+      }
+
+      function showPage(selectedPage, updateHistory = true) {
+        tabs.forEach((item) => {
+          const selected = item.dataset.page === selectedPage;
+          item.classList.toggle("is-active", selected);
+          if (selected) item.setAttribute("aria-current", "page");
+          else item.removeAttribute("aria-current");
+        });
+        pages.forEach((page) => { page.hidden = page.dataset.content !== selectedPage; });
+        projectControls.forEach((control) => { control.hidden = selectedPage !== "work"; });
+        document.querySelector("[data-project-footer]").hidden = selectedPage !== "work";
+        if (updateHistory && window.location.hash !== `#${selectedPage}`) {
+          window.history.pushState({ page: selectedPage }, "", `#${selectedPage}`);
+        }
+      }
+
+      tabs.forEach((tab) => tab.addEventListener("click", (event) => {
+        event.preventDefault();
+        showPage(tab.dataset.page);
+      }));
+      avatarButton.addEventListener("click", () => setAboutOpen(true));
+      document.querySelectorAll("[data-about-close]").forEach((button) => button.addEventListener("click", () => setAboutOpen(false)));
+      document.addEventListener("keydown", (event) => {
+        if (aboutOverlay.hidden) return;
+        if (event.key === "Escape") setAboutOpen(false);
+        if (event.key === "Tab") {
+          const focusable = [...aboutPanel.querySelectorAll('button, a[href]')];
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && (document.activeElement === first || document.activeElement === aboutPanel)) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      });
+      window.addEventListener("popstate", () => {
+        const page = window.location.hash.slice(1);
+        showPage(["work", "about", "love"].includes(page) ? page : "work", false);
+      });
+      const initialPage = window.location.hash.slice(1);
+      showPage(["work", "about", "love"].includes(initialPage) ? initialPage : "work", false);
+    </script>
+  </body>
+</html>
