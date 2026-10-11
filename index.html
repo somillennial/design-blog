@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=8" />
   </head>
   <body>
     <div class="portfolio">
@@ -21,9 +21,10 @@
         </nav>
 
         <div class="identity avatar-frame">
-          <button class="avatar-button" type="button" aria-label="Open about panel" aria-haspopup="dialog" aria-expanded="false" aria-controls="about-panel">
-            <video src="assets/alex-memoji.MOV" autoplay loop muted playsinline aria-hidden="true"></video>
-          </button>
+          <a class="avatar-button" href="https://www.linkedin.com/in/jamguerrero/" target="_blank" rel="noopener noreferrer" aria-label="Say hi on LinkedIn">
+            <video src="assets/alex-memoji.MOV" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+          </a>
+          <span class="avatar-label" aria-hidden="true">say hi</span>
         </div>
       </header>
 
@@ -85,54 +86,20 @@
       </footer>
     </div>
 
-    <div class="about-overlay" data-about-overlay hidden>
-      <button class="about-backdrop" type="button" aria-label="Close about panel" data-about-close></button>
-      <aside class="about-panel" id="about-panel" role="dialog" aria-modal="true" aria-label="About Alex Guerrero" tabindex="-1">
-        <header class="about-panel-header">
-          <span class="about-panel-file"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><ellipse cx="12" cy="12" rx="2" ry="2" fill="#61dafb"/><ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="#61dafb" stroke-width="1.2"/><ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="#61dafb" stroke-width="1.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="3.5" stroke="#61dafb" stroke-width="1.2" transform="rotate(120 12 12)"/></svg>about.tsx</span>
-          <button class="about-close" type="button" data-about-close>close</button>
-        </header>
-        <div class="about-code-scroll">
-          <div class="about-code-wrap">
-            <div class="about-line-numbers" aria-hidden="true"></div>
-            <pre class="about-code"><span class="code-keyword">import</span> { <span class="code-name">Psychology</span>, <span class="code-name">Neuroscience</span> } <span class="code-keyword">from</span> <span class="code-value">'College'</span>;
-
-<span class="code-const">const</span> <span class="code-name">alex guerrero</span> : <span class="code-type">Designer</span> = [
-  {
-    <span class="code-key">tldr</span>: <span class="code-value">"Staff Product &amp; Systems Designer based in Madrid. Entering my design engineering era"</span>,
-
-    <span class="code-key">company</span>: <span class="code-value">"Personio"</span>,
-    <span class="code-key">role</span>: <span class="code-value">"Staff Product Designer"</span>,
-    <span class="code-key">focus</span>: <span class="code-value">"Design Systems, Architecture, Infrastructure"</span>,
-    <span class="code-key">passions</span>: <span class="code-value">"Motion, Prototyping, Photography"</span>,
-
-    <span class="code-key">stack</span>: [
-      <a href="https://www.figma.com" target="_blank" rel="noreferrer">"Figma" ↗</a>,
-      <a href="https://react.dev" target="_blank" rel="noreferrer">"React" ↗</a>,
-      <a href="https://www.typescriptlang.org" target="_blank" rel="noreferrer">"TypeScript" ↗</a>,
-      <a href="https://motion.dev" target="_blank" rel="noreferrer">"Motion" ↗</a>,
-      <a href="https://gsap.com" target="_blank" rel="noreferrer">"GSAP" ↗</a>,
-    ],
-
-    <span class="code-key">endpoints</span>: [
-      <a href="https://www.linkedin.com/in/jamguerrero/" target="_blank" rel="noreferrer">"LinkedIn" ↗</a>,
-      <a href="https://github.com/somillennial" target="_blank" rel="noreferrer">"Github" ↗</a>,
-      <a href="mailto:alex@craftz.design">"Chat" ↗</a>,
-    ],
-  },
-];</pre>
-          </div>
-        </div>
-        <footer class="about-panel-footer"><span>~/portfolio · main</span><span>deployed 2026-05-13</span></footer>
-      </aside>
-    </div>
-
     <script>
       const tabs = [...document.querySelectorAll(".section-tab")];
       const pages = [...document.querySelectorAll(".content-page")];
       const avatarButton = document.querySelector(".avatar-button");
-      const aboutOverlay = document.querySelector("[data-about-overlay]");
-      const aboutPanel = document.querySelector(".about-panel");
+      const avatarVideo = document.querySelector(".avatar-button video");
+      const avatarLabel = document.querySelector(".avatar-label");
+      const avatarLabelText = avatarLabel.textContent;
+      avatarLabel.replaceChildren(...[...avatarLabelText].map((character, index) => {
+        const span = document.createElement("span");
+        span.className = "avatar-label-char";
+        span.style.setProperty("--char-index", index);
+        span.textContent = character === " " ? "\u00a0" : character;
+        return span;
+      }));
       const projectControls = [...document.querySelectorAll("[data-project-control]")];
       const projects = [
         { title: "Personio Design System", description: "Design system and foundations for Personio." },
@@ -140,8 +107,35 @@
         { title: "BlueOptima", description: "Founding designer." },
       ];
       let activeProject = 0;
-      const lineNumbers = document.querySelector(".about-line-numbers");
-      lineNumbers.innerHTML = Array.from({ length: 27 }, (_, index) => `<span>${index + 1}</span>`).join("");
+
+      function resumeAvatarVideo(immediate = false) {
+        if (document.visibilityState !== "visible") return;
+        const play = () => {
+          if (document.visibilityState !== "visible") return;
+          const playback = avatarVideo.play();
+          if (playback) playback.catch(() => {});
+        };
+        if (immediate) play();
+        else requestAnimationFrame(play);
+      }
+
+      function dismissAvatarLabel() {
+        document.querySelector(".avatar-frame").classList.add("label-dismissed");
+      }
+
+      const avatarFrame = document.querySelector(".avatar-frame");
+      avatarButton.addEventListener("click", dismissAvatarLabel);
+      avatarFrame.addEventListener("pointerleave", () => {
+        if (document.hasFocus() && document.visibilityState === "visible") {
+          avatarFrame.classList.remove("label-dismissed");
+        }
+      });
+      window.addEventListener("blur", dismissAvatarLabel);
+      window.addEventListener("focus", () => {
+        dismissAvatarLabel();
+        resumeAvatarVideo();
+      });
+      window.addEventListener("pageshow", () => resumeAvatarVideo());
 
       function showProject(index) {
         activeProject = (index + projects.length) % projects.length;
@@ -155,13 +149,9 @@
       document.querySelector(".project-step-previous").addEventListener("click", () => showProject(activeProject - 1));
       document.querySelector(".project-step-next").addEventListener("click", () => showProject(activeProject + 1));
 
-      function setAboutOpen(open) {
-        aboutOverlay.hidden = !open;
-        avatarButton.setAttribute("aria-expanded", String(open));
-        document.body.classList.toggle("about-open", open);
-        if (open) aboutPanel.focus();
-        else avatarButton.focus();
-      }
+      document.addEventListener("visibilitychange", () => {
+        resumeAvatarVideo();
+      });
 
       function showPage(selectedPage, updateHistory = true) {
         tabs.forEach((item) => {
@@ -182,19 +172,6 @@
         event.preventDefault();
         showPage(tab.dataset.page);
       }));
-      avatarButton.addEventListener("click", () => setAboutOpen(true));
-      document.querySelectorAll("[data-about-close]").forEach((button) => button.addEventListener("click", () => setAboutOpen(false)));
-      document.addEventListener("keydown", (event) => {
-        if (aboutOverlay.hidden) return;
-        if (event.key === "Escape") setAboutOpen(false);
-        if (event.key === "Tab") {
-          const focusable = [...aboutPanel.querySelectorAll('button, a[href]')];
-          const first = focusable[0];
-          const last = focusable[focusable.length - 1];
-          if (event.shiftKey && (document.activeElement === first || document.activeElement === aboutPanel)) { event.preventDefault(); last.focus(); }
-          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-        }
-      });
       window.addEventListener("popstate", () => {
         const page = window.location.hash.slice(1);
         showPage(["work", "about", "love"].includes(page) ? page : "work", false);
