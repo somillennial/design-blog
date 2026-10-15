@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=19" />
   </head>
   <body>
     <div class="portfolio">
@@ -184,7 +184,7 @@
       }
 
       function updateBandMetrics() {
-        const cardWidth = projectBand.firstElementChild.getBoundingClientRect().width;
+        const cardWidth = projectBand.firstElementChild.offsetWidth;
         const sideRoom = Math.max(0, (previewCarousel.clientWidth - cardWidth) / 2);
         const scaledInset = cardWidth * 0.06;
         const peekWidth = Math.min(120, Math.max(0, sideRoom - scaledInset));

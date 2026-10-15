@@ -185,7 +185,7 @@ button, a { font: inherit; }
   flex: none;
   transform: perspective(1200px) rotateX(var(--pointer-tilt-y)) rotateY(var(--pointer-tilt-x)) translate3d(var(--pointer-x), var(--pointer-y), 0) scale(.88);
   transform-origin: center;
-  opacity: .4;
+  opacity: .12;
   transition:
     transform var(--band-duration, 420ms) cubic-bezier(.22, 1, .36, 1),
     opacity var(--band-duration, 420ms) cubic-bezier(.22, 1, .36, 1),
