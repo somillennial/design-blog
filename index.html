@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <link rel="stylesheet" href="styles.css?v=26" />
   </head>
   <body>
     <div class="portfolio">
@@ -50,7 +50,19 @@
                 <article class="project-slide is-active" data-project-index="0" aria-current="true">
                   <div class="preview has-animation" data-project-index="0" role="group" aria-label="Personio Responsive Intelligence project preview">
                     <span class="preview-index" aria-hidden="true">01</span>
-                    <video class="project-preview-video" src="assets/personio-responsive-intelligence.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+                    <video class="project-preview-video project-preview-video-first" src="assets/personio-responsive-intelligence.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+                    <video class="project-preview-video project-preview-video-second" src="assets/personio-responsive-intelligence-02.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+                    <div class="video-segments" role="group" aria-label="Personio preview video segments" data-video-segments>
+                      <button class="video-segment is-active" type="button" aria-label="Play preview video 1" aria-pressed="true" data-video-segment="0">
+                        <span class="video-segment-track"><span class="video-segment-progress" data-video-progress="0"></span></span>
+                      </button>
+                      <button class="video-segment" type="button" aria-label="Play preview video 2" aria-pressed="false" data-video-segment="1">
+                        <span class="video-segment-track"><span class="video-segment-progress" data-video-progress="1"></span></span>
+                      </button>
+                      <button class="video-segment" type="button" aria-label="Preview video 3 coming soon" aria-pressed="false" aria-disabled="true" disabled data-video-segment="2">
+                        <span class="video-segment-track"><span class="video-segment-progress" data-video-progress="2"></span></span>
+                      </button>
+                    </div>
                     <div class="preview-art art-personio" aria-hidden="true">
                       <div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div>
                       <div class="art-side"><i></i><i></i><i></i></div>
@@ -134,7 +146,10 @@
         return span;
       }));
       const projectControls = [...document.querySelectorAll("[data-project-control]")];
-      const projectPreviewVideo = document.querySelector(".project-preview-video");
+      const projectPreviewVideo = document.querySelector(".project-preview-video-first");
+      const projectPreviewVideoSecond = document.querySelector(".project-preview-video-second");
+      const videoSegmentControls = [...document.querySelectorAll("[data-video-segment]")];
+      const videoSegmentProgress = [...document.querySelectorAll("[data-video-progress]")];
       const previewCarousel = document.querySelector(".preview-carousel");
       const projectBand = document.querySelector(".project-band");
       const projects = [
@@ -146,6 +161,20 @@
       let bandMoving = false;
       let bandDirection = 0;
       let projectVideoHasEntered = false;
+      const previewVideoSegments = [
+        { src: "assets/personio-responsive-intelligence.mp4", duration: 8, clipDuration: 2.516667 },
+        { src: "assets/personio-responsive-intelligence-02.mp4", duration: 16.016667 },
+        null,
+      ];
+      let activeVideoSegment = 0;
+      let segmentElapsed = 0;
+      let firstClipHasEnded = false;
+      let segmentControlHovered = false;
+      let activePreviewVideo = projectPreviewVideo;
+      let pendingSegmentSelection = false;
+      let segmentSelectionId = 0;
+      let lastProgressFrame = null;
+      let lastProgressVideoTime = 0;
 
       function resumeAvatarVideo(immediate = false) {
         if (document.visibilityState !== "visible") return;
@@ -215,14 +244,24 @@
       }
 
       function syncProjectPreview() {
-        const shouldShowVideo = activeProject === 0 && !document.querySelector("#work").hidden;
+        const shouldShowVideo = activeProject === 0 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
         if (!shouldShowVideo) {
           projectPreviewVideo.pause();
+          projectPreviewVideoSecond.pause();
+          return;
+        }
+
+        if (pendingSegmentSelection) {
+          projectPreviewVideo.pause();
+          projectPreviewVideoSecond.pause();
           return;
         }
 
         if (projectVideoHasEntered) {
-          projectPreviewVideo.classList.add("is-instant", "is-visible");
+          activePreviewVideo.classList.add("is-instant", "is-visible");
+          if (!(activeVideoSegment === 0 && firstClipHasEnded)) {
+            activePreviewVideo.play().catch(() => {});
+          }
           return;
         }
 
@@ -230,6 +269,118 @@
         projectVideoHasEntered = true;
         projectPreviewVideo.play().catch(() => {});
       }
+
+      function updateVideoSegmentControls() {
+        videoSegmentControls.forEach((control, index) => {
+          const isActive = index === activeVideoSegment;
+          control.classList.toggle("is-active", isActive);
+          control.setAttribute("aria-pressed", String(isActive));
+        });
+      }
+
+      function waitForVideoFrame(video) {
+        return new Promise((resolve) => {
+          const onFrame = () => requestAnimationFrame(() => requestAnimationFrame(resolve));
+          if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) onFrame();
+          else video.addEventListener("loadeddata", onFrame, { once: true });
+        });
+      }
+
+      async function selectVideoSegment(index) {
+        const segment = previewVideoSegments[index];
+        if (!segment) return;
+        const selectionId = ++segmentSelectionId;
+        activeVideoSegment = index;
+        segmentElapsed = 0;
+        if (index === 0) {
+          pendingSegmentSelection = false;
+          firstClipHasEnded = false;
+          updateVideoSegmentControls();
+          projectPreviewVideoSecond.pause();
+          projectPreviewVideo.currentTime = 0;
+          lastProgressVideoTime = 0;
+          activePreviewVideo = projectPreviewVideo;
+          projectPreviewVideoSecond.classList.remove("is-visible");
+          projectPreviewVideo.classList.add("is-instant", "is-visible");
+          syncProjectPreview();
+        } else {
+          pendingSegmentSelection = true;
+          projectPreviewVideo.classList.add("is-instant");
+          projectPreviewVideo.pause();
+          projectPreviewVideoSecond.pause();
+          syncProjectPreview();
+          if (projectPreviewVideoSecond.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+            projectPreviewVideoSecond.preload = "auto";
+            projectPreviewVideoSecond.load();
+          }
+          await waitForVideoFrame(projectPreviewVideoSecond);
+          if (selectionId !== segmentSelectionId) return;
+          pendingSegmentSelection = false;
+          updateVideoSegmentControls();
+          activePreviewVideo = projectPreviewVideoSecond;
+          projectPreviewVideoSecond.currentTime = 0;
+          lastProgressVideoTime = 0;
+          projectPreviewVideo.classList.remove("is-visible");
+          projectPreviewVideoSecond.classList.add("is-instant", "is-visible");
+          syncProjectPreview();
+        }
+      }
+
+      function updateVideoSegmentProgress(now) {
+        if (lastProgressFrame !== null && activeProject === 0 && !document.querySelector("#work").hidden && document.visibilityState === "visible") {
+          const delta = (now - lastProgressFrame) / 1000;
+          if (activeVideoSegment === 0 && !pendingSegmentSelection) {
+            if (firstClipHasEnded) {
+              segmentElapsed = Math.min(previewVideoSegments[0].duration, segmentElapsed + delta);
+            } else if (!projectPreviewVideo.paused) {
+              segmentElapsed = Math.min(previewVideoSegments[0].clipDuration, projectPreviewVideo.currentTime);
+            }
+            if (segmentElapsed >= previewVideoSegments[0].duration) {
+              selectVideoSegment(1);
+            }
+          } else if (activeVideoSegment === 1 && !pendingSegmentSelection && !projectPreviewVideoSecond.paused && !projectPreviewVideoSecond.ended) {
+            const videoTime = projectPreviewVideoSecond.currentTime;
+            const playbackDelta = Math.max(0, videoTime - lastProgressVideoTime);
+            const progressRate = segmentControlHovered ? .2 : 1.25;
+            segmentElapsed = Math.min(videoTime, previewVideoSegments[1].duration, segmentElapsed + playbackDelta * progressRate);
+            lastProgressVideoTime = videoTime;
+          } else if (activeVideoSegment === 1 && !pendingSegmentSelection && projectPreviewVideoSecond.ended && segmentElapsed < previewVideoSegments[1].duration) {
+            segmentElapsed = Math.min(previewVideoSegments[1].duration, segmentElapsed + delta * 1.25);
+          }
+        }
+        lastProgressFrame = now;
+        videoSegmentProgress.forEach((fill, index) => {
+          const duration = previewVideoSegments[index]?.duration;
+          const elapsed = index < activeVideoSegment ? (duration || 0) : index === activeVideoSegment ? segmentElapsed : 0;
+          fill.style.transform = `scaleX(${duration ? Math.min(1, elapsed / duration) : 0})`;
+        });
+        requestAnimationFrame(updateVideoSegmentProgress);
+      }
+
+      videoSegmentControls.forEach((control) => {
+        control.addEventListener("click", () => selectVideoSegment(Number(control.dataset.videoSegment)));
+      });
+      const videoSegmentBar = document.querySelector("[data-video-segments]");
+      videoSegmentBar.addEventListener("pointerenter", () => {
+        segmentControlHovered = true;
+        syncProjectPreview();
+      });
+      videoSegmentBar.addEventListener("pointerleave", () => {
+        segmentControlHovered = false;
+        syncProjectPreview();
+      });
+      projectPreviewVideo.addEventListener("ended", () => {
+        if (activeVideoSegment === 0) {
+          firstClipHasEnded = true;
+          segmentElapsed = Math.max(segmentElapsed, previewVideoSegments[0].clipDuration);
+        }
+        projectPreviewVideoSecond.preload = "auto";
+        projectPreviewVideoSecond.load();
+      });
+      projectPreviewVideoSecond.addEventListener("ended", () => {
+        if (activeVideoSegment === 1) segmentElapsed = previewVideoSegments[1].duration;
+      });
+      requestAnimationFrame(updateVideoSegmentProgress);
 
       document.querySelector(".project-step-previous").addEventListener("click", () => showProject(-1));
       document.querySelector(".project-step-next").addEventListener("click", () => showProject(1));
@@ -344,6 +495,7 @@
 
       document.addEventListener("visibilitychange", () => {
         resumeAvatarVideo();
+        syncProjectPreview();
       });
 
       function showPage(selectedPage, updateHistory = true) {
