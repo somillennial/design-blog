@@ -341,11 +341,12 @@
           } else if (activeVideoSegment === 1 && !pendingSegmentSelection && !projectPreviewVideoSecond.paused && !projectPreviewVideoSecond.ended) {
             const videoTime = projectPreviewVideoSecond.currentTime;
             const playbackDelta = Math.max(0, videoTime - lastProgressVideoTime);
-            const progressRate = segmentControlHovered ? .2 : 1.25;
-            segmentElapsed = Math.min(videoTime, previewVideoSegments[1].duration, segmentElapsed + playbackDelta * progressRate);
+            const progressRate = segmentControlHovered ? .2 : 1;
+            segmentElapsed = Math.min(previewVideoSegments[1].duration, segmentElapsed + playbackDelta * progressRate);
             lastProgressVideoTime = videoTime;
           } else if (activeVideoSegment === 1 && !pendingSegmentSelection && projectPreviewVideoSecond.ended && segmentElapsed < previewVideoSegments[1].duration) {
-            segmentElapsed = Math.min(previewVideoSegments[1].duration, segmentElapsed + delta * 1.25);
+            const progressRate = segmentControlHovered ? .2 : 1;
+            segmentElapsed = Math.min(previewVideoSegments[1].duration, segmentElapsed + delta * progressRate);
           }
         }
         lastProgressFrame = now;
@@ -378,7 +379,7 @@
         projectPreviewVideoSecond.load();
       });
       projectPreviewVideoSecond.addEventListener("ended", () => {
-        if (activeVideoSegment === 1) segmentElapsed = previewVideoSegments[1].duration;
+        if (activeVideoSegment === 1) lastProgressVideoTime = projectPreviewVideoSecond.currentTime;
       });
       requestAnimationFrame(updateVideoSegmentProgress);
 
