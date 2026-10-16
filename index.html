@@ -331,12 +331,12 @@
           const delta = (now - lastProgressFrame) / 1000;
           if (activeVideoSegment === 0 && !pendingSegmentSelection) {
             if (firstClipHasEnded) {
-              const progressRate = segmentControlHovered ? .2 : 1;
+              const progressRate = segmentControlHovered ? .5 : 1;
               segmentElapsed = Math.min(previewVideoSegments[0].duration, segmentElapsed + delta * progressRate);
             } else if (!projectPreviewVideo.paused) {
               const videoTime = projectPreviewVideo.currentTime;
               const playbackDelta = Math.max(0, videoTime - lastProgressVideoTime);
-              const progressRate = segmentControlHovered ? .2 : 1;
+              const progressRate = segmentControlHovered ? .5 : 1;
               segmentElapsed = Math.min(previewVideoSegments[0].duration, segmentElapsed + playbackDelta * progressRate);
               lastProgressVideoTime = videoTime;
             }
@@ -346,11 +346,11 @@
           } else if (activeVideoSegment === 1 && !pendingSegmentSelection && !projectPreviewVideoSecond.paused && !projectPreviewVideoSecond.ended) {
             const videoTime = projectPreviewVideoSecond.currentTime;
             const playbackDelta = Math.max(0, videoTime - lastProgressVideoTime);
-            const progressRate = segmentControlHovered ? .2 : 1;
+            const progressRate = segmentControlHovered ? .5 : 1;
             segmentElapsed = Math.min(previewVideoSegments[1].duration, segmentElapsed + playbackDelta * progressRate);
             lastProgressVideoTime = videoTime;
           } else if (activeVideoSegment === 1 && !pendingSegmentSelection && projectPreviewVideoSecond.ended && segmentElapsed < previewVideoSegments[1].duration) {
-            const progressRate = segmentControlHovered ? .2 : 1;
+            const progressRate = segmentControlHovered ? .5 : 1;
             segmentElapsed = Math.min(previewVideoSegments[1].duration, segmentElapsed + delta * progressRate);
           }
         }
