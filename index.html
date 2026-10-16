@@ -331,9 +331,14 @@
           const delta = (now - lastProgressFrame) / 1000;
           if (activeVideoSegment === 0 && !pendingSegmentSelection) {
             if (firstClipHasEnded) {
-              segmentElapsed = Math.min(previewVideoSegments[0].duration, segmentElapsed + delta);
+              const progressRate = segmentControlHovered ? .2 : 1;
+              segmentElapsed = Math.min(previewVideoSegments[0].duration, segmentElapsed + delta * progressRate);
             } else if (!projectPreviewVideo.paused) {
-              segmentElapsed = Math.min(previewVideoSegments[0].clipDuration, projectPreviewVideo.currentTime);
+              const videoTime = projectPreviewVideo.currentTime;
+              const playbackDelta = Math.max(0, videoTime - lastProgressVideoTime);
+              const progressRate = segmentControlHovered ? .2 : 1;
+              segmentElapsed = Math.min(previewVideoSegments[0].duration, segmentElapsed + playbackDelta * progressRate);
+              lastProgressVideoTime = videoTime;
             }
             if (segmentElapsed >= previewVideoSegments[0].duration) {
               selectVideoSegment(1);
@@ -373,7 +378,7 @@
       projectPreviewVideo.addEventListener("ended", () => {
         if (activeVideoSegment === 0) {
           firstClipHasEnded = true;
-          segmentElapsed = Math.max(segmentElapsed, previewVideoSegments[0].clipDuration);
+          lastProgressVideoTime = projectPreviewVideo.currentTime;
         }
         projectPreviewVideoSecond.preload = "auto";
         projectPreviewVideoSecond.load();
