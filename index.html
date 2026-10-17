@@ -259,7 +259,10 @@
 
         if (projectVideoHasEntered) {
           activePreviewVideo.classList.add("is-instant", "is-visible");
-          if (!(activeVideoSegment === 0 && firstClipHasEnded)) {
+          const activeVideoHasFinished = activeVideoSegment === 0
+            ? firstClipHasEnded
+            : activeVideoSegment === 1 && projectPreviewVideoSecond.ended;
+          if (!activeVideoHasFinished) {
             activePreviewVideo.play().catch(() => {});
           }
           return;
