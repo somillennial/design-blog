@@ -73,7 +73,7 @@
                   <div class="preview" data-project-index="1" role="group" aria-label="Personio Design System project preview">
                     <span class="preview-index" aria-hidden="true">02</span>
                     <div class="design-system-visual" aria-hidden="true">
-                      <img class="design-system-artwork" src="assets/personio-design-system.png" alt="" />
+                      <video class="design-system-artwork" src="assets/personio-design-system.mp4" muted playsinline loop preload="metadata" aria-hidden="true"></video>
                     </div>
                   </div>
                 </article>
@@ -237,6 +237,7 @@
       const projectControls = [...document.querySelectorAll("[data-project-control]")];
       const projectPreviewVideo = document.querySelector(".project-preview-video-first");
       const projectPreviewVideoSecond = document.querySelector(".project-preview-video-second");
+      const designSystemPreviewVideo = document.querySelector(".design-system-artwork");
       const videoSegmentControls = [...document.querySelectorAll("[data-video-segment]")];
       const videoSegmentProgress = [...document.querySelectorAll("[data-video-progress]")];
       const previewCarousel = document.querySelector(".preview-carousel");
@@ -339,6 +340,9 @@
 
       function syncProjectPreview() {
         const shouldShowVideo = activeProject === 0 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        const shouldShowDesignSystemVideo = activeProject === 1 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        if (shouldShowDesignSystemVideo) designSystemPreviewVideo.play().catch(() => {});
+        else designSystemPreviewVideo.pause();
         if (!shouldShowVideo) {
           projectPreviewVideo.pause();
           projectPreviewVideoSecond.pause();
