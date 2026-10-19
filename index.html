@@ -70,11 +70,10 @@
                   </div>
                 </article>
                 <article class="project-slide" data-project-index="1" aria-hidden="true">
-                  <div class="preview" data-project-index="1" role="group" aria-label="Personio Product Architecture project preview">
+                  <div class="preview" data-project-index="1" role="group" aria-label="Personio Design System project preview">
                     <span class="preview-index" aria-hidden="true">02</span>
-                    <div class="preview-art art-personio" aria-hidden="true">
-                      <div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div>
-                      <div class="art-side"><i></i><i></i><i></i></div>
+                    <div class="design-system-visual" aria-hidden="true">
+                      <img class="design-system-artwork" src="assets/personio-design-system.png" alt="" />
                     </div>
                   </div>
                 </article>
@@ -119,105 +118,86 @@
         <div class="case-study-scroll">
           <article class="case-study-article">
             <header class="case-study-intro" id="case-intro">
-              <h2>A companion that<br />stays beside the work</h2>
-              <p class="case-study-lede">Designing a more useful relationship between Personio’s Assistant and the product around it.</p>
-              <p class="case-study-project-name">Personio Responsive Intelligence <span>·</span> App-frame redesign and embedded assistant</p>
-              <p class="case-study-meta">Customer interviews: April–June 2026 <span>·</span> Project dates: [confirm] <span>·</span> My role and delivery status: [confirm]</p>
+              <h2>A shared frame for<br />work and intelligence</h2>
+              <p class="case-study-lede">Personio’s Assistant and app frame evolved as one system: a persistent workspace for AI, navigation, and everyday actions.</p>
+              <p class="case-study-project-name">Personio Responsive Intelligence <span>·</span> Assistant and app-frame redesign</p>
+              <p class="case-study-meta">Project dates: [confirm] <span>·</span> Role: [confirm] <span>·</span> Delivery: [confirm]</p>
               <figure class="case-study-image-placeholder case-study-image-hero">
-                <div><span>Image placeholder · Hero</span><p>Wide product view with the Assistant beside an Analytics report builder. Use a real screen or label it as a prototype; remove sensitive customer data.</p></div>
-                <figcaption>The product surface and the Assistant, together</figcaption>
+                <div><span>Image placeholder · Product frame</span><p>Header, search, profile, inbox, page, and Assistant in one view.</p></div>
               </figure>
             </header>
 
             <section class="case-study-section" id="case-problem">
-              <h3>The Assistant could help with the work. It could also get in its way.</h3>
-              <p>The original Assistant opened over the product. It took up the space where people needed to read, navigate, and act. In Analytics, it could even cover the blank report template it was meant to help someone create.</p>
-              <p>Then there was the conversation itself. Moving between product areas could reset the thread. The Assistant felt less like a companion to ongoing work and more like a separate chat people had to keep restarting.</p>
+              <h3>The Assistant and product competed for the same space.</h3>
+              <p>The overlay obscured navigation and actions—and in Analytics, the report template it was meant to help create.</p>
+              <p>Global search was limited to Home; profile and inbox access lacked prominence. AI and frame supported one workflow from disconnected layers.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Before</span><p>One annotated frame showing the overlay hiding navigation, a suggested action, and the blank report template.</p></div>
-                <figcaption>The Assistant obscured the next step</figcaption>
+                <div><span>Image placeholder · Existing experience</span><p>Overlay, navigation, Analytics template, and Home-only search.</p></div>
               </figure>
             </section>
 
             <section class="case-study-section" id="case-research">
-              <h3>People were losing their place, their thread, and the thing they came to do.</h3>
-              <p>In customer interviews between April and June 2026, I saw the same tension surface in different ways. In an employee-change workflow, removing product navigation made it harder to stay oriented. In Analytics, a route change reset the conversation just when someone expected it to continue.</p>
-              <p>And when a blank report template appeared only after the Assistant was closed, the person had not thought to close it. I took these as connected problems: keep people oriented, carry the conversation forward, and leave the work itself in view.</p>
+              <h3>Interviews traced the friction across the frame.</h3>
+              <p>April–June 2026 sessions surfaced three failures: lost navigation during employee changes, a reset Analytics conversation, and a hidden report template.</p>
+              <p>One participant also expected workflows in a persistent inbox. The shared need was to keep work and assistance in reach.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Research</span><p>Anonymized journey snippets or three observation notes, each paired with the workflow step it affected.</p></div>
-                <figcaption>Three breakdowns, grounded in customer sessions</figcaption>
+                <div><span>Image placeholder · Research</span><p>Anonymized moments from employee-change and Analytics sessions.</p></div>
               </figure>
             </section>
 
-            <section class="case-study-section" id="case-question">
-              <h3>How might the Assistant stay close without taking over?</h3>
-              <p>I used that question to set the direction. The Assistant should add help to the page, while changing only what the task actually needs.</p>
-              <p>That meant keeping navigation and workspace visible, carrying useful conversation context between routes, and supporting a workflow from start to finish—not only answering a prompt.</p>
+            <section class="case-study-section" id="case-frame">
+              <h3>The frame makes core actions easier to reach.</h3>
+              <p>Global search moves beyond Home into the header; the employee profile and inbox entry points gain prominence there too.</p>
+              <p>These persistent controls establish orientation while the Assistant stays available beside the active product page.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Principles</span><p>A small set of principles shown beside the product moments they protect: orientation, continuity, and visibility.</p></div>
-                <figcaption>Principles drawn from the interview breakdowns</figcaption>
+                <div><span>Image placeholder · New header</span><p>Search, employee profile, inbox, navigation, and Assistant entry.</p></div>
               </figure>
             </section>
 
             <section class="case-study-section" id="case-options">
-              <h3>A persistent panel solved a different problem than a better overlay.</h3>
-              <p>I compared three directions: keep the overlay, put AI directly into individual pages, or give the Assistant an embedded panel in the product frame. The overlay kept the interruptions that prompted the work.</p>
-              <p>Page-level AI made sense for focused tasks, but did not offer one conversation that could travel across the product. The embedded panel offered that shared space, while leaving room for page-native help when a chat was not the right fit.</p>
+              <h3>One interaction model had to serve the whole workflow.</h3>
+              <p>Overlay, page-level AI, and an embedded panel were compared. The overlay kept its interruptions; page-level AI could not carry a conversation across the product.</p>
+              <p>The embedded Assistant offered continuity, with the frame and page adapting around it.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Options</span><p>Overlay, contextual entry point, and embedded panel at the same viewport size.</p></div>
-                <figcaption>Comparing the trade-offs side by side</figcaption>
+                <div><span>Image placeholder · Interaction models</span><p>Overlay, page-level AI, and embedded panel at one workflow step.</p></div>
               </figure>
             </section>
 
-            <section class="case-study-section" id="case-experience">
-              <h3>One Assistant, with room to change shape.</h3>
-              <p>I shaped the experience around the space available. On wide screens, a resizable panel sits beside the page, so people can use the Assistant and still see their work.</p>
-              <p>On narrow screens, it becomes full-screen to keep the conversation legible. For more involved work, a dedicated <code>/assistant</code> destination gives the same conversation room to grow.</p>
+            <section class="case-study-section" id="case-responsive">
+              <h3>The surface responds to available space.</h3>
+              <p>Wide viewports use a resizable side panel beside the page. Narrow screens switch to full-screen; <code>/assistant</code> supports immersive work.</p>
+              <p>The same conversation is intended to persist between modes.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Responsive states</span><p>Wide split view, resized panel, full-screen mode, and narrow viewport. Show the same thread moving between modes.</p></div>
-                <figcaption>The workspace stays available when there is room</figcaption>
+                <div><span>Image placeholder · Responsive states</span><p>Wide panel, narrow full-screen, and persistent thread.</p></div>
               </figure>
             </section>
 
             <section class="case-study-section" id="case-context">
-              <h3>The conversation should not start over when the page changes.</h3>
-              <p>I kept the Assistant close through a persistent entry in the top navigation. Compact navigation gives the page more room, then expands to reveal its labels. As people move between product areas, the conversation stays with them and the page can offer a relevant starting point.</p>
-              <p>What the Assistant can actually read from a page is a separate design and engineering question. Context, permissions, sensitive or unsaved state, and fallback behavior all need validation before promising what it knows.</p>
+              <h3>Conversation state and page context are separate contracts.</h3>
+              <p>The thread persists across routes; the current URL can inform page-aware prompts.</p>
+              <p>Context payload, permissions, unsaved state, and fallbacks require technical and security validation. Persistent chat does not mean unrestricted page access.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Frame and context</span><p>App-frame anatomy and a short journey showing the same conversation continue into Analytics.</p></div>
-                <figcaption>Persistent navigation, conversation, and page context</figcaption>
+                <div><span>Image placeholder · Context flow</span><p>Persistent thread with page-aware prompt changes.</p></div>
               </figure>
             </section>
 
             <section class="case-study-section" id="case-platform">
-              <h3>Not every AI interaction needs to become a chat.</h3>
-              <p>I also wanted the frame to support more than a single chat window. Specialist widgets could handle agent work, while a focused action—like a summary inside a product area—could use a shared pattern without starting a conversation.</p>
-              <p>Product teams would still own their domain data and agents. The shared frame provides a coherent place for these experiences to meet; the task should determine which one appears.</p>
+              <h3>Shared patterns support distinct AI surfaces.</h3>
+              <p>The Assistant can host specialist widgets; focused tools such as summaries can stay within product pages.</p>
+              <p>Shared UI patterns provide consistency while product teams own domain data and agents. The technical brief proposes routing requests through Amazon Bedrock.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · AI surfaces</span><p>A simple map of the shared Assistant, specialist widgets, and page-level AI features.</p></div>
-                <figcaption>One product frame, several ways AI can help</figcaption>
+                <div><span>Image placeholder · AI surfaces</span><p>Frame, Assistant, specialist widgets, page tools, and ownership.</p></div>
               </figure>
             </section>
 
-            <section class="case-study-section" id="case-measure">
-              <h3>Make the measures answer the original problem.</h3>
-              <p>The brief proposes tracking Assistant CSAT, weekly active users, context-loss events, movement between panel and full-screen, and assisted task completion. Support volume, page performance, and time-to-interactive are proposed guardrails.</p>
-              <p>These are measures to validate, not results. No post-launch data was provided, so there is no impact claim here.</p>
+            <section class="case-study-section" id="case-outcome">
+              <h3>The redesign joins the frame and Assistant.</h3>
+              <p>Global search, employee profile, inbox, navigation, and AI share a persistent product frame.</p>
+              <p>Proposed measures include CSAT, weekly use, context loss, mode changes, task completion, support, and performance. Delivery and impact remain unverified.</p>
               <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Measurement</span><p>Only add an analytics view with real definitions, sample size, and measurement window. Redact customer identifiers.</p></div>
-                <figcaption>Proposed measures; results still to verify</figcaption>
+                <div><span>Image placeholder · Connected experience</span><p>Header, active page, navigation, and responsive Assistant.</p></div>
               </figure>
-            </section>
-
-            <section class="case-study-section" id="case-contribution">
-              <h3>The direction was a frame that made room for the work.</h3>
-              <p>I came back to the original tension throughout the project: help should be close at hand, but it should not make the product disappear. That led me toward a persistent, responsive companion and a broader frame that could also support more focused AI experiences.</p>
-              <p>I would judge the direction against the same moments that exposed the problem: can people stay oriented, keep their conversation, and reach the work in front of them? The brief proposes measures for those questions, but I have no verified results to claim here. [Add what was tested or shipped and any measured outcomes.]</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Closing frame</span><p>A final frame showing the product, Assistant, and page-level AI patterns working within one shared experience.</p></div>
-                <figcaption>A direction to validate against the original problems</figcaption>
-              </figure>
-              <footer class="case-study-source-note">[Confirm your role, project dates, delivery status, and permission to publish research or internal material.]</footer>
+              <footer class="case-study-source-note">[Confirm role, dates, final scope, delivery, and outcomes.]</footer>
             </section>
           </article>
         </div>
@@ -268,7 +248,7 @@
       let caseStudyOpen = false;
       const projects = [
         { title: "Personio Responsive Intelligence", description: "App-frame redesign and embedded assistant" },
-        { title: "Personio Product Architecture", description: "Product architecture across Personio." },
+        { title: "Personio Design System", description: "Components, Foundations, and Product Architecture" },
         { title: "BlueOptima", description: "Founding designer." },
       ];
       let activeProject = 0;
