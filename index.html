@@ -39,11 +39,9 @@
             <div class="preview-carousel" aria-label="Project previews">
               <div class="project-band" aria-live="polite">
                 <article class="project-slide" data-project-index="2" aria-hidden="true">
-                  <div class="preview" data-project-index="2" role="group" aria-label="BlueOptima project preview">
-                    <span class="preview-index" aria-hidden="true">03</span>
-                    <div class="preview-art art-personio" aria-hidden="true">
-                      <div class="art-panel"><span class="art-kicker">BLUEOPTIMA</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div>
-                      <div class="art-side"><i></i><i></i><i></i></div>
+                  <div class="preview performance-preview" data-project-index="2" role="group" tabindex="0" aria-label="Performance overhaul project preview. Press Enter to open case study.">
+                    <div class="performance-image-frame">
+                      <img src="assets/performance-01.png" alt="Performance overview with personal tasks, direct reports, and review cycles." data-performance-image-current draggable="false" />
                     </div>
                   </div>
                 </article>
@@ -52,17 +50,6 @@
                     <span class="preview-index" aria-hidden="true">01</span>
                     <video class="project-preview-video project-preview-video-first" src="assets/personio-responsive-intelligence.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
                     <video class="project-preview-video project-preview-video-second" src="assets/personio-responsive-intelligence-02.mp4" muted playsinline preload="none" aria-hidden="true"></video>
-                    <div class="video-segments" role="group" aria-label="Personio preview video segments" data-video-segments>
-                      <button class="video-segment is-active" type="button" aria-label="Play preview video 1" aria-pressed="true" data-video-segment="0">
-                        <span class="video-segment-track"><span class="video-segment-progress" data-video-progress="0"></span></span>
-                      </button>
-                      <button class="video-segment" type="button" aria-label="Play preview video 2" aria-pressed="false" data-video-segment="1">
-                        <span class="video-segment-track"><span class="video-segment-progress" data-video-progress="1"></span></span>
-                      </button>
-                      <button class="video-segment" type="button" aria-label="Preview video 3 coming soon" aria-pressed="false" aria-disabled="true" disabled data-video-segment="2">
-                        <span class="video-segment-track"><span class="video-segment-progress" data-video-progress="2"></span></span>
-                      </button>
-                    </div>
                     <div class="preview-art art-personio" aria-hidden="true">
                       <div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div>
                       <div class="art-side"><i></i><i></i><i></i></div>
@@ -77,7 +64,24 @@
                     </div>
                   </div>
                 </article>
+                <article class="project-slide" data-project-index="3" aria-hidden="true">
+                  <div class="preview customization-preview" data-project-index="3" role="group" tabindex="0" aria-label="Personio Customization Settings project preview. Press Enter to open case study.">
+                    <span>Personio</span>
+                    <strong>Customization settings</strong>
+                  </div>
+                </article>
               </div>
+            </div>
+            <div class="video-segments project-video-segments" role="group" aria-label="Personio preview video segments" data-video-segments>
+              <button class="video-segment is-active" type="button" aria-label="Play preview video 1" aria-pressed="true" data-video-segment="0"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="0"></span></span></button>
+              <button class="video-segment" type="button" aria-label="Play preview video 2" aria-pressed="false" data-video-segment="1"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="1"></span></span></button>
+              <button class="video-segment" type="button" aria-label="Preview video 3 coming soon" aria-pressed="false" aria-disabled="true" disabled data-video-segment="2"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="2"></span></span></button>
+            </div>
+            <div class="video-segments performance-image-segments" role="group" aria-label="Performance screenshots">
+              <button class="video-segment is-active" type="button" aria-label="Show performance screenshot 1" aria-pressed="true" data-performance-image="0"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="0"></span></span></button>
+              <button class="video-segment" type="button" aria-label="Show performance screenshot 2" aria-pressed="false" data-performance-image="1"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="1"></span></span></button>
+              <button class="video-segment" type="button" aria-label="Show performance screenshot 3" aria-pressed="false" data-performance-image="2"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="2"></span></span></button>
+              <button class="video-segment" type="button" aria-label="Show performance screenshot 4" aria-pressed="false" data-performance-image="3"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="3"></span></span></button>
             </div>
           </div>
         </section>
@@ -92,7 +96,6 @@
             <h1>Systems and Product Designer</h1>
             <div class="about-copy">
               <p>Currently working as a staff product designer at Personio from sunny Madrid, owning our design system and the product architecture.</p>
-              <p>Previously worked as founding designer in BlueOptima.</p>
             </div>
             <div class="about-links" aria-label="More links">
               <a href="mailto:alex@craftz.design">Get in touch</a>
@@ -114,9 +117,9 @@
         </section>
       </main>
 
-      <section class="case-study" id="case-study" aria-label="Personio Responsive Intelligence case study" aria-hidden="true" inert>
+      <section class="case-study" id="case-study" aria-label="Personio case study" aria-hidden="true" inert>
         <div class="case-study-scroll">
-          <article class="case-study-article">
+          <article class="case-study-article" data-case-study-project="0">
             <header class="case-study-intro" id="case-intro">
               <h2>A shared frame for<br />work and intelligence</h2>
               <p class="case-study-lede">Personio’s Assistant and app frame evolved as one system: a persistent workspace for AI, navigation, and everyday actions.</p>
@@ -200,6 +203,73 @@
               <footer class="case-study-source-note">[Confirm role, dates, final scope, delivery, and outcomes.]</footer>
             </section>
           </article>
+          <article class="case-study-article" data-case-study-project="2" hidden>
+            <header class="case-study-intro" id="performance-intro">
+              <h2>Performance works<br />in cycles.</h2>
+              <p class="case-study-lede">Personio’s Performance suite served 1,400+ mid-market customers across Europe. The 2024 overhaul connected fragmented tools into a role-aware system for planning, running, and reviewing performance.</p>
+              <p class="case-study-project-name">Performance overhaul <span>·</span> Product architecture and service design</p>
+              <p class="case-study-meta">2024 <span>·</span> Lead interaction design <span>·</span> Product architecture, service design, IA foundations, ICP definition, and visual design</p>
+            </header>
+
+            <section class="case-study-section" id="performance-cycle">
+              <h3>The model starts with the work, not the feature.</h3>
+              <p>Performance moves through planning, reviewing, rewarding, and monitoring. The architecture treats those activities as a recurring cycle instead of a linear checklist.</p>
+            </section>
+
+            <section class="case-study-section" id="performance-roles">
+              <h3>One cycle, four different scopes.</h3>
+              <p>Individual contributors, managers, org leaders, and HR managers carry different responsibilities.</p>
+              <p>The information architecture scales with that responsibility, surfacing more of the system as each role’s scope expands.</p>
+            </section>
+
+            <section class="case-study-section" id="performance-experience">
+              <h3>A unified suite separates setup from participation.</h3>
+              <p>Four disconnected features became one Performance area, with dedicated spaces for overview, personal and team performance, review cycles, and management.</p>
+              <p>HR managers configure the process; employees and leaders take part through role-appropriate views.</p>
+            </section>
+
+            <section class="case-study-section" id="performance-research">
+              <h3>The structure came from how HR teams work.</h3>
+              <p>Seventeen moderated card-sorting sessions with non-customer HR managers across the UK, Germany, and wider Europe explored how performance activities are planned, sequenced, and connected.</p>
+            </section>
+
+            <section class="case-study-section" id="performance-outcomes">
+              <h3>The architecture scaled beyond Performance.</h3>
+              <p>The scope-based pattern was adopted across 10 product areas; a separate summary cites the information architecture’s reuse across seven products.</p>
+              <p>The FY2024–25 results summary reports 124% NRR in Mid-market, UKI &amp; International and names Performance the #1 upsell product. The material does not attribute those outcomes solely to the redesign.</p>
+            </section>
+          </article>
+          <article class="case-study-article" data-case-study-project="3" hidden>
+            <header class="case-study-intro" id="customization-intro">
+              <h2>Personio, in your brand.</h2>
+              <p class="case-study-lede">Personio is part of the everyday employee experience. Customization settings let each company make that experience feel like an extension of its own brand.</p>
+              <p class="case-study-project-name">Personio Customization Settings <span>·</span> Design collaboration with Andru Dunn</p>
+              <p class="case-study-meta">2025 <span>·</span> Brand expression, product experience, accessibility</p>
+            </header>
+
+            <section class="case-study-section" id="customization-identity">
+              <h3>A workplace product should feel like it belongs.</h3>
+              <p>Employees meet Personio through the rhythm of work: checking details, finding information, and completing everyday tasks. A familiar company identity makes that shared space feel closer to home.</p>
+            </section>
+
+            <section class="case-study-section" id="customization-controls">
+              <h3>Make the product recognizably yours.</h3>
+              <p>Administrators can add their logo, choose an accent colour, and set the wallpaper from a selection of ready-made options or an image of their own.</p>
+              <p>Small choices build a consistent presence across the moments employees spend in Personio.</p>
+            </section>
+
+            <section class="case-study-section" id="customization-colour">
+              <h3>Brand expression has to work across the whole product.</h3>
+              <p>A customer’s colour cannot be treated as decoration for one screen. It needs to carry through controls, navigation, and content while keeping hierarchy clear in both light and dark appearances.</p>
+              <p>Andru’s theming work shaped the design principle: translate a chosen brand colour into a considered range of tones, so the interface can express the brand without losing clarity.</p>
+            </section>
+
+            <section class="case-study-section" id="customization-accessibility">
+              <h3>Customization comes with guardrails.</h3>
+              <p>People need to recognize actions, read content, and distinguish information at a glance—even when the palette changes. Accessibility and usability are part of the customization logic, not cleanup after it.</p>
+              <p>The result is a product that can feel personal while keeping familiar patterns and legible states consistent across its surfaces.</p>
+            </section>
+          </article>
         </div>
       </section>
 
@@ -243,18 +313,36 @@
       const previewCarousel = document.querySelector(".preview-carousel");
       const projectBand = document.querySelector(".project-band");
       const caseStudy = document.querySelector(".case-study");
+      const caseStudyArticles = [...caseStudy.querySelectorAll("[data-case-study-project]")];
       const caseStudyClose = document.querySelector("[data-case-study-close]");
       const caseStudyScroll = caseStudy.querySelector(".case-study-scroll");
+      const performanceImage = document.querySelector("[data-performance-image-current]");
+      const performanceStage = document.querySelector(".stage");
+      const performanceImageControls = [...document.querySelectorAll("[data-performance-image]")];
+      const performanceImageProgress = [...document.querySelectorAll("[data-performance-image-progress]")];
+      const performanceImageSources = [1, 2, 3, 4].map((number) => `assets/performance-0${number}.png`);
+      const performanceImageAlts = [
+        "Performance overview with personal tasks, direct reports, and review cycles.",
+        "Personal performance view with feedback and an AI-generated summary.",
+        "Performance cycle setup with timeframe and participant filtering rules.",
+        "Performance growth cycle timeline with scheduled activities and milestones.",
+      ];
+      const performanceImageDuration = 10000;
+      let activePerformanceImage = 0;
+      let performanceImageStartedAt = 0;
+      let performanceImageFrame = null;
       const footerGlassControls = [...document.querySelectorAll(".footer-project-control, .case-study-close")];
       let caseStudyOpen = false;
       const projects = [
-        { title: "Personio Responsive Intelligence", description: "App-frame redesign and embedded assistant" },
+        { title: "Personio Responsive Intelligence", description: "App-frame redesign and embedded assistant", caseStudy: true },
         { title: "Personio Design System", description: "Components, Foundations, and Product Architecture" },
-        { title: "BlueOptima", description: "Founding designer." },
+        { title: "Performance overhaul", description: "Role-based architecture for a continuous cycle", caseStudy: true },
+        { title: "Personio Customization Settings", description: "Make Personio feel like your brand", caseStudy: true },
       ];
       let activeProject = 0;
       let bandMoving = false;
       let bandDirection = 0;
+      let bandCenterOffset = 0;
       let projectVideoHasEntered = false;
       const previewVideoSegments = [
         { src: "assets/personio-responsive-intelligence.mp4", duration: 8, clipDuration: 2.516667 },
@@ -271,6 +359,54 @@
       let lastProgressFrame = null;
       let lastProgressVideoTime = 0;
 
+      function selectPerformanceImage(index, restart = true) {
+        activePerformanceImage = (index + performanceImageSources.length) % performanceImageSources.length;
+        performanceImage.src = performanceImageSources[activePerformanceImage];
+        performanceImage.alt = performanceImageAlts[activePerformanceImage];
+        performanceImageControls.forEach((control, controlIndex) => {
+          const isActive = controlIndex === activePerformanceImage;
+          control.classList.toggle("is-active", isActive);
+          control.setAttribute("aria-pressed", String(isActive));
+        });
+        if (restart) performanceImageStartedAt = performance.now();
+        performanceImageProgress.forEach((fill, fillIndex) => {
+          fill.style.transform = `scaleX(${fillIndex < activePerformanceImage ? 1 : 0})`;
+        });
+      }
+
+      function updatePerformanceImageProgress(now) {
+        performanceImageFrame = null;
+        if (caseStudyOpen || activeProject !== 2 || document.querySelector("#work").hidden || document.visibilityState !== "visible") return;
+        const elapsed = now - performanceImageStartedAt;
+        if (elapsed >= performanceImageDuration) {
+          selectPerformanceImage(activePerformanceImage + 1);
+        }
+        const progress = Math.min(1, Math.max(0, (now - performanceImageStartedAt) / performanceImageDuration));
+        performanceImageProgress.forEach((fill, index) => {
+          const value = index < activePerformanceImage ? 1 : index === activePerformanceImage ? progress : 0;
+          fill.style.transform = `scaleX(${value})`;
+        });
+        performanceImageFrame = requestAnimationFrame(updatePerformanceImageProgress);
+      }
+
+      function syncPerformanceImageCarousel(reset = false) {
+        const shouldRun = !caseStudyOpen && activeProject === 2 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        performanceStage.classList.toggle("has-performance-preview", shouldRun);
+        if (shouldRun && performanceImageFrame !== null) return;
+        if (performanceImageFrame !== null) cancelAnimationFrame(performanceImageFrame);
+        performanceImageFrame = null;
+        if (!shouldRun) return;
+        if (reset) selectPerformanceImage(0);
+        else performanceImageStartedAt = performance.now();
+        performanceImageFrame = requestAnimationFrame(updatePerformanceImageProgress);
+      }
+
+      performanceImageControls.forEach((control) => {
+        control.addEventListener("click", () => {
+          selectPerformanceImage(Number(control.dataset.performanceImage));
+          syncPerformanceImageCarousel();
+        });
+      });
       function resumeAvatarVideo(immediate = false) {
         if (document.visibilityState !== "visible") return;
         const play = () => {
@@ -314,7 +450,10 @@
         const peekWidth = Math.min(120, Math.max(0, sideRoom - scaledInset));
         const gap = Math.max(0, sideRoom - scaledInset - peekWidth);
         projectBand.style.gap = `${gap}px`;
-        return cardWidth + gap;
+        const stride = cardWidth + gap;
+        bandCenterOffset = (projectBand.children.length - 3) * stride / 2;
+        if (!bandMoving && !isDraggingPreview) projectBand.style.setProperty("--offset-x", `${bandCenterOffset}px`);
+        return stride;
       }
 
       function showProject(direction, velocity = 0) {
@@ -335,11 +474,13 @@
         bandMoving = true;
         projectBand.style.setProperty("--band-duration", `${duration}ms`);
         projectBand.classList.remove("is-dragging", "is-recentering");
-        projectBand.style.setProperty("--offset-x", `${-direction * stride}px`);
+        projectBand.style.setProperty("--offset-x", `${bandCenterOffset - direction * stride}px`);
       }
 
       function syncProjectPreview() {
+        syncPerformanceImageCarousel();
         const shouldShowVideo = activeProject === 0 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        videoSegmentBar.classList.toggle("is-visible", shouldShowVideo);
         const shouldShowDesignSystemVideo = activeProject === 1 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
         if (shouldShowDesignSystemVideo) designSystemPreviewVideo.play().catch(() => {});
         else designSystemPreviewVideo.pause();
@@ -515,16 +656,27 @@
         caseStudy.classList.toggle("is-open", open);
         caseStudy.setAttribute("aria-hidden", String(!open));
         caseStudy.inert = !open;
+        caseStudyArticles.forEach((article) => {
+          const isCurrent = open && Number(article.dataset.caseStudyProject) === activeProject;
+          article.hidden = !isCurrent;
+          article.inert = !isCurrent;
+          article.setAttribute("aria-hidden", String(!isCurrent));
+        });
+        caseStudy.setAttribute("aria-label", `${projects[activeProject].title} case study`);
         if (open) {
           caseStudyScroll.scrollTop = 0;
           caseStudy.style.setProperty("--case-study-tint", ".80");
           caseStudyClose.focus({ preventScroll: true });
         } else {
-          document.querySelector('.preview[data-project-index="0"]').focus?.({ preventScroll: true });
+          document.querySelector(`.preview[data-project-index="${activeProject}"]`).focus?.({ preventScroll: true });
         }
+        syncProjectPreview();
       }
       caseStudyScroll.addEventListener("scroll", () => {
-        const secondAnchor = document.querySelector("#case-problem");
+        if (!caseStudyOpen) return;
+        const currentArticle = caseStudy.querySelector(".case-study-article:not([hidden])");
+        if (!currentArticle) return;
+        const secondAnchor = currentArticle.querySelector(".case-study-section");
         const scrollBounds = caseStudyScroll.getBoundingClientRect();
         const transitionDistance = Math.max(1, secondAnchor.getBoundingClientRect().top - scrollBounds.top + caseStudyScroll.scrollTop);
         const progress = Math.min(1, Math.max(0, caseStudyScroll.scrollTop / transitionDistance));
@@ -538,12 +690,24 @@
           return;
         }
         if (event.target.closest("button")) return;
-        if (activeProject === 0 && !caseStudyOpen) setCaseStudyOpen(true);
+        if (projects[activeProject].caseStudy && !caseStudyOpen) setCaseStudyOpen(true);
       });
       document.querySelector('.preview[data-project-index="0"]').addEventListener("keydown", (event) => {
         if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
           event.preventDefault();
           if (activeProject === 0 && !caseStudyOpen) setCaseStudyOpen(true);
+        }
+      });
+      document.querySelector('.preview[data-project-index="2"]').addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
+          event.preventDefault();
+          if (activeProject === 2 && !caseStudyOpen) setCaseStudyOpen(true);
+        }
+      });
+      document.querySelector('.preview[data-project-index="3"]').addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
+          event.preventDefault();
+          if (activeProject === 3 && !caseStudyOpen) setCaseStudyOpen(true);
         }
       });
       document.addEventListener("keydown", (event) => {
@@ -569,7 +733,8 @@
         if (bandDirection > 0) projectBand.append(projectBand.firstElementChild);
         else projectBand.insertBefore(projectBand.lastElementChild, projectBand.firstElementChild);
         projectBand.classList.add("is-recentering");
-        projectBand.style.setProperty("--offset-x", "0px");
+        updateBandMetrics();
+        projectBand.style.setProperty("--offset-x", `${bandCenterOffset}px`);
         projectBand.getBoundingClientRect();
         const activeSlide = projectBand.children[1];
         [...projectBand.children].forEach((slide, index) => {
@@ -618,7 +783,7 @@
         dragCurrentX = (event.clientX - dragStartX) * 0.94;
         dragSamples.push({ x: event.clientX, time: event.timeStamp });
         dragSamples = dragSamples.filter((sample) => event.timeStamp - sample.time <= 90);
-        projectBand.style.setProperty("--offset-x", `${dragCurrentX}px`);
+        projectBand.style.setProperty("--offset-x", `${bandCenterOffset + dragCurrentX}px`);
       });
       previewCarousel.addEventListener("pointerleave", () => {
         projectBand.querySelectorAll(".project-slide").forEach((slide) => {
@@ -647,7 +812,7 @@
           const direction = dragCurrentX < 0 || (Math.abs(dragCurrentX) <= 56 && velocity < 0) ? 1 : -1;
           showProject(direction, velocity);
         }
-        else projectBand.style.setProperty("--offset-x", "0px");
+        else projectBand.style.setProperty("--offset-x", `${bandCenterOffset}px`);
         dragCurrentX = 0;
         dragSamples = [];
       }
@@ -686,7 +851,10 @@
         showPage(["work", "about", "love"].includes(page) ? page : "work", false);
       });
       const initialPage = window.location.hash.slice(1);
+      projectBand.classList.add("is-recentering");
       showPage(["work", "about", "love"].includes(initialPage) ? initialPage : "work", false);
+      projectBand.getBoundingClientRect();
+      requestAnimationFrame(() => projectBand.classList.remove("is-recentering"));
       window.addEventListener("resize", updateBandMetrics);
     </script>
   </body>
