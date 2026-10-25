@@ -121,13 +121,8 @@
         <div class="case-study-scroll">
           <article class="case-study-article" data-case-study-project="0">
             <header class="case-study-intro" id="case-intro">
-              <h2>A shared frame for<br />work and intelligence</h2>
+              <h2>A shared frame for work and intelligence</h2>
               <p class="case-study-lede">Personio’s Assistant and app frame evolved as one system: a persistent workspace for AI, navigation, and everyday actions.</p>
-              <p class="case-study-project-name">Personio Responsive Intelligence <span>·</span> Assistant and app-frame redesign</p>
-              <p class="case-study-meta">Project dates: [confirm] <span>·</span> Role: [confirm] <span>·</span> Delivery: [confirm]</p>
-              <figure class="case-study-image-placeholder case-study-image-hero">
-                <div><span>Image placeholder · Product frame</span><p>Header, search, profile, inbox, page, and Assistant in one view.</p></div>
-              </figure>
             </header>
 
             <section class="case-study-section" id="case-problem">
@@ -271,6 +266,9 @@
             </section>
           </article>
         </div>
+        <nav class="case-study-anchor-nav" aria-label="Case study sections" data-case-study-anchor-nav>
+          <div class="case-study-anchor-list" data-case-study-anchor-list></div>
+        </nav>
       </section>
 
       <footer class="project-footer" data-project-footer>
@@ -316,6 +314,8 @@
       const caseStudyArticles = [...caseStudy.querySelectorAll("[data-case-study-project]")];
       const caseStudyClose = document.querySelector("[data-case-study-close]");
       const caseStudyScroll = caseStudy.querySelector(".case-study-scroll");
+      const caseStudyAnchorList = caseStudy.querySelector("[data-case-study-anchor-list]");
+      let caseStudyAnchorNodes = [];
       const performanceImage = document.querySelector("[data-performance-image-current]");
       const performanceStage = document.querySelector(".stage");
       const performanceImageControls = [...document.querySelectorAll("[data-performance-image]")];
@@ -340,9 +340,6 @@
         { title: "Personio Customization Settings", description: "Make Personio feel like your brand", caseStudy: true },
       ];
       let activeProject = 0;
-      let bandMoving = false;
-      let bandDirection = 0;
-      let bandCenterOffset = 0;
       let projectVideoHasEntered = false;
       const previewVideoSegments = [
         { src: "assets/personio-responsive-intelligence.mp4", duration: 8, clipDuration: 2.516667 },
@@ -450,31 +447,74 @@
         const peekWidth = Math.min(120, Math.max(0, sideRoom - scaledInset));
         const gap = Math.max(0, sideRoom - scaledInset - peekWidth);
         projectBand.style.gap = `${gap}px`;
-        const stride = cardWidth + gap;
-        bandCenterOffset = (projectBand.children.length - 3) * stride / 2;
-        if (!bandMoving && !isDraggingPreview) projectBand.style.setProperty("--offset-x", `${bandCenterOffset}px`);
-        return stride;
+        projectBand.style.paddingInline = `${sideRoom}px`;
+        const activeSlide = projectBand.querySelector(".project-slide.is-active");
+        if (activeSlide && !isDraggingPreview) centerProjectSlide(activeSlide, "auto");
       }
 
-      function showProject(direction, velocity = 0) {
-        if (bandMoving) return;
-        projectBand.querySelectorAll(".project-slide").forEach((slide) => {
-          slide.style.setProperty("--pointer-x", "0px");
-          slide.style.setProperty("--pointer-y", "0px");
-          slide.style.setProperty("--pointer-tilt-x", "0deg");
-          slide.style.setProperty("--pointer-tilt-y", "0deg");
+      function centerProjectSlide(slide, behavior = "smooth") {
+        const slideBounds = slide.getBoundingClientRect();
+        const carouselBounds = previewCarousel.getBoundingClientRect();
+        const slideCenter = slideBounds.left + slideBounds.width / 2;
+        const carouselCenter = carouselBounds.left + carouselBounds.width / 2;
+        previewCarousel.scrollTo({
+          left: previewCarousel.scrollLeft + slideCenter - carouselCenter,
+          behavior,
         });
-        const stride = updateBandMetrics();
-        const duration = Math.max(300, Math.min(420, 420 - Math.abs(velocity) * 80));
-        const targetSlide = direction > 0 ? projectBand.children[2] : projectBand.children[0];
-        updateProjectDetails(Number(targetSlide.dataset.projectIndex));
-        projectBand.querySelector(".project-slide.is-active").classList.remove("is-active");
-        targetSlide.classList.add("is-active");
-        bandDirection = direction;
-        bandMoving = true;
-        projectBand.style.setProperty("--band-duration", `${duration}ms`);
-        projectBand.classList.remove("is-dragging", "is-recentering");
-        projectBand.style.setProperty("--offset-x", `${bandCenterOffset - direction * stride}px`);
+      }
+
+      function updateActivePreview() {
+        const carouselCenter = previewCarousel.getBoundingClientRect().left + previewCarousel.clientWidth / 2;
+        let activeSlide = null;
+        let closestDistance = Infinity;
+        [...projectBand.children].forEach((slide) => {
+          const bounds = slide.getBoundingClientRect();
+          const distance = Math.abs(bounds.left + bounds.width / 2 - carouselCenter);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            activeSlide = slide;
+          }
+        });
+        if (!activeSlide) return null;
+        [...projectBand.children].forEach((slide) => {
+          const isActive = slide === activeSlide;
+          slide.classList.toggle("is-active", isActive);
+          if (isActive) {
+            slide.setAttribute("aria-current", "true");
+            slide.setAttribute("aria-hidden", "false");
+          } else {
+            slide.removeAttribute("aria-current");
+            slide.setAttribute("aria-hidden", "true");
+          }
+        });
+        const nextProject = Number(activeSlide.dataset.projectIndex);
+        if (nextProject !== activeProject) {
+          updateProjectDetails(nextProject);
+          syncProjectPreview();
+        }
+        return activeSlide;
+      }
+
+      function settlePreviewCarousel() {
+        if (isDraggingPreview) return;
+        const activeSlide = updateActivePreview();
+        if (!activeSlide) return;
+        const activeIndex = [...projectBand.children].indexOf(activeSlide);
+        previewCarousel.classList.add("is-recentering");
+        if (activeIndex > 1) {
+          for (let index = 1; index < activeIndex; index += 1) projectBand.append(projectBand.firstElementChild);
+        } else if (activeIndex < 1) {
+          for (let index = activeIndex; index < 1; index += 1) projectBand.insertBefore(projectBand.lastElementChild, projectBand.firstElementChild);
+        }
+        updateBandMetrics();
+        centerProjectSlide(projectBand.querySelector(".project-slide.is-active"), "auto");
+        requestAnimationFrame(() => previewCarousel.classList.remove("is-recentering"));
+      }
+
+      function showProject(direction) {
+        const activeSlide = projectBand.querySelector(".project-slide.is-active");
+        const targetSlide = direction > 0 ? activeSlide?.nextElementSibling : activeSlide?.previousElementSibling;
+        if (targetSlide) centerProjectSlide(targetSlide, "smooth");
       }
 
       function syncProjectPreview() {
@@ -650,6 +690,44 @@
         });
       });
 
+      function updateCaseStudyAnchorNav() {
+        if (!caseStudyOpen || !caseStudyAnchorNodes.length) return;
+        const scrollTop = caseStudyScroll.getBoundingClientRect().top;
+        let activeIndex = 0;
+        let closestDistance = Infinity;
+        caseStudyAnchorNodes.forEach((anchor, index) => {
+          const distance = Math.abs(anchor.getBoundingClientRect().top - scrollTop);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            activeIndex = index;
+          }
+        });
+        [...caseStudyAnchorList.children].forEach((button, index) => {
+          const isActive = index === activeIndex;
+          button.classList.toggle("is-active", isActive);
+          if (isActive) button.setAttribute("aria-current", "step");
+          else button.removeAttribute("aria-current");
+        });
+      }
+
+      function syncCaseStudyAnchorNav(article) {
+        caseStudyAnchorNodes = [...article.querySelectorAll(":scope > .case-study-intro, :scope > .case-study-section")];
+        caseStudyAnchorList.replaceChildren(...caseStudyAnchorNodes.map((anchor, index) => {
+          const heading = anchor.querySelector("h2, h3");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "case-study-anchor-item";
+          button.setAttribute("aria-label", `Go to ${heading?.textContent.trim().replace(/\s+/g, " ") || `section ${index + 1}`}`);
+          button.addEventListener("click", () => {
+            const scrollTop = caseStudyScroll.getBoundingClientRect().top;
+            const anchorTop = anchor.getBoundingClientRect().top;
+            caseStudyScroll.scrollTo({ top: caseStudyScroll.scrollTop + anchorTop - scrollTop, behavior: "smooth" });
+          });
+          return button;
+        }));
+        updateCaseStudyAnchorNav();
+      }
+
       function setCaseStudyOpen(open) {
         caseStudyOpen = open;
         document.body.classList.toggle("case-study-open", open);
@@ -666,7 +744,7 @@
         if (open) {
           caseStudyScroll.scrollTop = 0;
           caseStudy.style.setProperty("--case-study-tint", ".80");
-          caseStudyClose.focus({ preventScroll: true });
+          syncCaseStudyAnchorNav(caseStudy.querySelector(".case-study-article:not([hidden])"));
         } else {
           document.querySelector(`.preview[data-project-index="${activeProject}"]`).focus?.({ preventScroll: true });
         }
@@ -682,8 +760,112 @@
         const progress = Math.min(1, Math.max(0, caseStudyScroll.scrollTop / transitionDistance));
         const tintOpacity = .80 + progress * .16;
         caseStudy.style.setProperty("--case-study-tint", tintOpacity.toFixed(3));
+        updateCaseStudyAnchorNav();
       }, { passive: true });
       let suppressPreviewClick = false;
+      let previewTouchStart = null;
+      previewCarousel.addEventListener("touchstart", (event) => {
+        if (event.touches.length !== 1 || event.target.closest("button, a")) {
+          previewTouchStart = null;
+          return;
+        }
+        const touch = event.touches[0];
+        previewTouchStart = { x: touch.clientX, y: touch.clientY };
+      }, { passive: true });
+      previewCarousel.addEventListener("touchend", (event) => {
+        if (!previewTouchStart || event.changedTouches.length !== 1) return;
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - previewTouchStart.x;
+        const deltaY = touch.clientY - previewTouchStart.y;
+        previewTouchStart = null;
+        if (deltaY < -60 && Math.abs(deltaY) > Math.abs(deltaX) * 1.2 && projects[activeProject].caseStudy && !caseStudyOpen) {
+          suppressPreviewClick = true;
+          window.setTimeout(() => { suppressPreviewClick = false; }, 350);
+          setCaseStudyOpen(true);
+        }
+      }, { passive: true });
+      let previewWheelY = 0;
+      let previewWheelTimer = null;
+      let previewWheelOpenedStudy = false;
+      let caseStudyTouchStart = null;
+      caseStudyScroll.addEventListener("touchstart", (event) => {
+        if (event.touches.length !== 1) {
+          caseStudyTouchStart = null;
+          return;
+        }
+        const touch = event.touches[0];
+        caseStudyTouchStart = {
+          y: touch.clientY,
+          atTop: caseStudyScroll.scrollTop <= 2,
+          target: event.target,
+        };
+      }, { passive: true });
+      caseStudyScroll.addEventListener("touchend", (event) => {
+        if (!caseStudyTouchStart || event.changedTouches.length !== 1 || !caseStudyOpen) return;
+        const touch = event.changedTouches[0];
+        const deltaY = touch.clientY - caseStudyTouchStart.y;
+        const startedAtTop = caseStudyTouchStart.atTop;
+        const startedOnControl = caseStudyTouchStart.target.closest("button, a");
+        caseStudyTouchStart = null;
+        if (startedOnControl) return;
+        if (startedAtTop && deltaY > 60) {
+          setCaseStudyOpen(false);
+        }
+      }, { passive: true });
+      let caseStudyWheelY = 0;
+      let caseStudyWheelTimer = null;
+      document.addEventListener("wheel", (event) => {
+        // Keep routing wheel gestures by current UI state: after opening the overlay,
+        // browsers can keep targeting the preview until the stationary pointer moves.
+        if (caseStudyOpen) {
+          // Consume the rest of the same upward wheel burst that opened the study.
+          if (previewWheelOpenedStudy) {
+            event.preventDefault();
+            caseStudyWheelY = 0;
+            return;
+          }
+          if (Math.abs(event.deltaX) > Math.abs(event.deltaY) * 1.2) {
+            event.preventDefault();
+            caseStudyWheelY = 0;
+            window.clearTimeout(caseStudyWheelTimer);
+            return;
+          }
+          caseStudyWheelY += event.deltaY;
+          window.clearTimeout(caseStudyWheelTimer);
+          caseStudyWheelTimer = window.setTimeout(() => {
+            caseStudyWheelY = 0;
+          }, 180);
+          if (caseStudyScroll.scrollTop <= 2 && caseStudyWheelY < -70) {
+            event.preventDefault();
+            caseStudyWheelY = 0;
+            setCaseStudyOpen(false);
+          }
+          return;
+        }
+        // Wheel events can keep their original DOM target while the carousel
+        // rearranges slides under a stationary pointer. Use pointer coordinates
+        // for preview hit testing so the next gesture works without cursor motion.
+        const previewBounds = previewCarousel.getBoundingClientRect();
+        const pointerIsOverPreview = !document.querySelector("#work").hidden
+          && event.clientX >= previewBounds.left && event.clientX <= previewBounds.right
+          && event.clientY >= previewBounds.top && event.clientY <= previewBounds.bottom;
+        if (!pointerIsOverPreview) return;
+        // Let horizontal wheel input scroll the rail natively. Each preview is
+        // a snap anchor, so browser momentum is constrained by scroll-snap-stop.
+        if (Math.abs(event.deltaX) > Math.abs(event.deltaY) * 1.2) return;
+        previewWheelY += event.deltaY;
+        window.clearTimeout(previewWheelTimer);
+        previewWheelTimer = window.setTimeout(() => {
+          previewWheelY = 0;
+          previewWheelOpenedStudy = false;
+        }, 180);
+        if (previewWheelY > 70 && projects[activeProject].caseStudy) {
+          event.preventDefault();
+          previewWheelY = 0;
+          previewWheelOpenedStudy = true;
+          setCaseStudyOpen(true);
+        }
+      }, { passive: false, capture: true });
       previewCarousel.addEventListener("click", (event) => {
         if (suppressPreviewClick) {
           suppressPreviewClick = false;
@@ -728,42 +910,17 @@
         });
       });
 
-      projectBand.addEventListener("transitionend", (event) => {
-        if (event.target !== projectBand || event.propertyName !== "transform" || !bandMoving) return;
-        if (bandDirection > 0) projectBand.append(projectBand.firstElementChild);
-        else projectBand.insertBefore(projectBand.lastElementChild, projectBand.firstElementChild);
-        projectBand.classList.add("is-recentering");
-        updateBandMetrics();
-        projectBand.style.setProperty("--offset-x", `${bandCenterOffset}px`);
-        projectBand.getBoundingClientRect();
-        const activeSlide = projectBand.children[1];
-        [...projectBand.children].forEach((slide, index) => {
-          const isActive = index === 1;
-          slide.classList.toggle("is-active", isActive);
-          if (isActive) slide.setAttribute("aria-current", "true");
-          else slide.removeAttribute("aria-current");
-          slide.setAttribute("aria-hidden", String(!isActive));
-        });
-        activeProject = Number(activeSlide.dataset.projectIndex);
-        syncProjectPreview();
-        requestAnimationFrame(() => {
-          projectBand.classList.remove("is-recentering");
-          bandMoving = false;
-        });
-      });
-
       let dragStartX = 0;
-      let dragCurrentX = 0;
-      let dragSamples = [];
+      let dragStartScrollLeft = 0;
+      let dragDistance = 0;
       let isDraggingPreview = false;
       previewCarousel.addEventListener("pointerdown", (event) => {
-        if (bandMoving || event.button !== 0 || event.target.closest("button, a")) return;
+        if (event.pointerType !== "mouse" || event.button !== 0 || event.target.closest("button, a")) return;
         dragStartX = event.clientX;
-        dragCurrentX = 0;
-        dragSamples = [{ x: event.clientX, time: event.timeStamp }];
+        dragStartScrollLeft = previewCarousel.scrollLeft;
+        dragDistance = 0;
         isDraggingPreview = true;
         previewCarousel.classList.add("is-dragging");
-        projectBand.classList.add("is-dragging");
         previewCarousel.setPointerCapture(event.pointerId);
       });
       previewCarousel.addEventListener("pointermove", (event) => {
@@ -780,10 +937,8 @@
           }
           return;
         }
-        dragCurrentX = (event.clientX - dragStartX) * 0.94;
-        dragSamples.push({ x: event.clientX, time: event.timeStamp });
-        dragSamples = dragSamples.filter((sample) => event.timeStamp - sample.time <= 90);
-        projectBand.style.setProperty("--offset-x", `${bandCenterOffset + dragCurrentX}px`);
+        dragDistance = event.clientX - dragStartX;
+        previewCarousel.scrollLeft = dragStartScrollLeft - dragDistance;
       });
       previewCarousel.addEventListener("pointerleave", () => {
         projectBand.querySelectorAll(".project-slide").forEach((slide) => {
@@ -797,27 +952,25 @@
         if (!isDraggingPreview) return;
         isDraggingPreview = false;
         previewCarousel.classList.remove("is-dragging");
-        projectBand.classList.remove("is-dragging");
-        const firstSample = dragSamples[0];
-        const lastSample = dragSamples.at(-1);
-        const elapsed = Math.max(1, lastSample.time - firstSample.time);
-        const velocity = ((lastSample.x - firstSample.x) / elapsed) * 0.94;
-        const flicked = Math.abs(velocity) > 0.55;
-        const movedHorizontally = Math.abs(dragCurrentX) > 12;
-        if (movedHorizontally) {
+        if (Math.abs(dragDistance) > 12) {
           suppressPreviewClick = true;
           window.setTimeout(() => { suppressPreviewClick = false; }, 350);
         }
-        if (Math.abs(dragCurrentX) > 56 || flicked) {
-          const direction = dragCurrentX < 0 || (Math.abs(dragCurrentX) <= 56 && velocity < 0) ? 1 : -1;
-          showProject(direction, velocity);
-        }
-        else projectBand.style.setProperty("--offset-x", `${bandCenterOffset}px`);
-        dragCurrentX = 0;
-        dragSamples = [];
+        const activeSlide = updateActivePreview();
+        if (activeSlide) centerProjectSlide(activeSlide, "smooth");
       }
       previewCarousel.addEventListener("pointerup", finishPreviewDrag);
       previewCarousel.addEventListener("pointercancel", finishPreviewDrag);
+      previewCarousel.addEventListener("scroll", updateActivePreview, { passive: true });
+      if ("onscrollend" in previewCarousel) {
+        previewCarousel.addEventListener("scrollend", settlePreviewCarousel);
+      } else {
+        let previewSettleTimer = null;
+        previewCarousel.addEventListener("scroll", () => {
+          window.clearTimeout(previewSettleTimer);
+          previewSettleTimer = window.setTimeout(settlePreviewCarousel, 140);
+        }, { passive: true });
+      }
 
       document.addEventListener("visibilitychange", () => {
         resumeAvatarVideo();
@@ -851,10 +1004,7 @@
         showPage(["work", "about", "love"].includes(page) ? page : "work", false);
       });
       const initialPage = window.location.hash.slice(1);
-      projectBand.classList.add("is-recentering");
       showPage(["work", "about", "love"].includes(initialPage) ? initialPage : "work", false);
-      projectBand.getBoundingClientRect();
-      requestAnimationFrame(() => projectBand.classList.remove("is-recentering"));
       window.addEventListener("resize", updateBandMetrics);
     </script>
   </body>
