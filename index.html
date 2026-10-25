@@ -17,7 +17,6 @@
         <nav class="section-nav" aria-label="Main navigation">
           <a class="section-tab is-active" href="#work" data-page="work" aria-current="page">Work</a>
           <a class="section-tab" href="#about" data-page="about">About</a>
-          <a class="section-tab" href="#love" data-page="love">Things I love</a>
         </nav>
 
         <div class="identity avatar-frame">
@@ -38,8 +37,8 @@
           <div class="stage">
             <div class="preview-carousel" aria-label="Project previews">
               <div class="project-band" aria-live="polite">
-                <article class="project-slide" data-project-index="2" aria-hidden="true">
-                  <div class="preview performance-preview" data-project-index="2" role="group" tabindex="0" aria-label="Performance overhaul project preview. Press Enter to open case study.">
+                <article class="project-slide" data-project-index="1" aria-hidden="true">
+                  <div class="preview performance-preview" data-project-index="1" role="group" tabindex="0" aria-label="Performance overhaul project preview. Press Enter to open case study.">
                     <div class="performance-image-frame">
                       <img src="assets/performance-01.png" alt="Performance overview with personal tasks, direct reports, and review cycles." data-performance-image-current draggable="false" />
                     </div>
@@ -50,24 +49,12 @@
                     <span class="preview-index" aria-hidden="true">01</span>
                     <video class="project-preview-video project-preview-video-first" src="assets/personio-responsive-intelligence.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
                     <video class="project-preview-video project-preview-video-second" src="assets/personio-responsive-intelligence-02.mp4" muted playsinline preload="none" aria-hidden="true"></video>
-                    <div class="preview-art art-personio" aria-hidden="true">
-                      <div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div>
-                      <div class="art-side"><i></i><i></i><i></i></div>
-                    </div>
+                    <div class="preview-art art-personio" aria-hidden="true"><div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div><div class="art-side"><i></i><i></i><i></i></div></div>
                   </div>
                 </article>
-                <article class="project-slide" data-project-index="1" aria-hidden="true">
-                  <div class="preview" data-project-index="1" role="group" aria-label="Personio Design System project preview">
-                    <span class="preview-index" aria-hidden="true">02</span>
-                    <div class="design-system-visual" aria-hidden="true">
-                      <video class="design-system-artwork" src="assets/personio-design-system.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
-                    </div>
-                  </div>
-                </article>
-                <article class="project-slide" data-project-index="3" aria-hidden="true">
-                  <div class="preview customization-preview" data-project-index="3" role="group" tabindex="0" aria-label="Personio Customization Settings project preview. Press Enter to open case study.">
-                    <span>Personio</span>
-                    <strong>Customization settings</strong>
+                <article class="project-slide" data-project-index="2" aria-hidden="true">
+                  <div class="preview customization-preview" data-project-index="2" role="group" tabindex="0" aria-label="Personio Customization Settings project preview. Press Enter to open case study.">
+                    <div class="design-system-visual" aria-hidden="true"><video class="customization-preview-video" src="assets/personio-design-system.mp4" muted playsinline preload="metadata" aria-hidden="true"></video></div>
                   </div>
                 </article>
               </div>
@@ -97,24 +84,9 @@
             <div class="about-copy">
               <p>Currently working as a staff product designer at Personio from sunny Madrid, owning our design system and the product architecture.</p>
             </div>
-            <div class="about-links" aria-label="More links">
-              <a href="mailto:alex@craftz.design">Get in touch</a>
-              <a href="https://www.linkedin.com/in/jamguerrero/" target="_blank" rel="noreferrer">Linkedin</a>
-              <a href="https://craftz.design" target="_blank" rel="noreferrer">Experiments</a>
-            </div>
           </div>
         </section>
 
-        <section class="content-page love-page" id="love" data-content="love" aria-label="Things I love" hidden>
-          <div class="text-page">
-            <h1>Things I love</h1>
-            <ul class="love-list">
-              <li>Thoughtful interfaces</li>
-              <li>Design systems that make room for craft</li>
-              <li>The small details that make products feel right</li>
-            </ul>
-          </div>
-        </section>
       </main>
 
       <section class="case-study" id="case-study" aria-label="Personio case study" aria-hidden="true" inert>
@@ -125,80 +97,86 @@
               <p class="case-study-lede">Personio’s Assistant and app frame evolved as one system: a persistent workspace for AI, navigation, and everyday actions.</p>
             </header>
 
-            <section class="case-study-section" id="case-problem">
-              <h3>The Assistant and product competed for the same space.</h3>
-              <p>The overlay obscured navigation and actions—and in Analytics, the report template it was meant to help create.</p>
-              <p>Global search was limited to Home; profile and inbox access lacked prominence. AI and frame supported one workflow from disconnected layers.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Existing experience</span><p>Overlay, navigation, Analytics template, and Home-only search.</p></div>
-              </figure>
+            <section class="case-study-section case-study-section--media" id="case-problem">
+              <div class="case-study-copy">
+                <h3>A competition for real estate.</h3>
+                <p>The overlay separated assistance from the work it was meant to support. It covered page context and controls users needed to evaluate guidance and act on it, undermining the Assistant’s value. Its fixed interaction model also did not scale across workflows or screen sizes.</p>
+              </div>
+              <figure class="case-study-media"><img src="assets/assistant-overlay.png" alt="Analytics workspace with the Assistant open in a side panel." /></figure>
             </section>
 
-            <section class="case-study-section" id="case-research">
-              <h3>Interviews traced the friction across the frame.</h3>
-              <p>April–June 2026 sessions surfaced three failures: lost navigation during employee changes, a reset Analytics conversation, and a hidden report template.</p>
-              <p>One participant also expected workflows in a persistent inbox. The shared need was to keep work and assistance in reach.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Research</span><p>Anonymized moments from employee-change and Analytics sessions.</p></div>
-              </figure>
+            <section class="case-study-section case-study-section--media" id="case-research">
+              <div class="case-study-copy">
+                <h3>Interviews traced the friction across the frame.</h3>
+                <p>During Q2, we interviewed Personio’s Co-Creation Council about real workflows. They lost context during employee changes; in Analytics, conversations reset and report templates were hard to find.</p>
+                <p>The Assistant needed to stay anchored to the page and task.</p>
+              </div>
+              <figure class="case-study-media"><img src="assets/assistant-employee-change.png" alt="Employee promotion details form with the Assistant open alongside it." /></figure>
             </section>
 
-            <section class="case-study-section" id="case-frame">
+            <section class="case-study-section" id="case-frame"><div class="case-study-copy">
               <h3>The frame makes core actions easier to reach.</h3>
               <p>Global search moves beyond Home into the header; the employee profile and inbox entry points gain prominence there too.</p>
               <p>These persistent controls establish orientation while the Assistant stays available beside the active product page.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · New header</span><p>Search, employee profile, inbox, navigation, and Assistant entry.</p></div>
-              </figure>
-            </section>
+            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · New header</span><p>Search, employee profile, inbox, navigation, and Assistant entry.</p></div></figure></section>
 
-            <section class="case-study-section" id="case-options">
+            <section class="case-study-section" id="case-options"><div class="case-study-copy">
               <h3>One interaction model had to serve the whole workflow.</h3>
               <p>Overlay, page-level AI, and an embedded panel were compared. The overlay kept its interruptions; page-level AI could not carry a conversation across the product.</p>
               <p>The embedded Assistant offered continuity, with the frame and page adapting around it.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Interaction models</span><p>Overlay, page-level AI, and embedded panel at one workflow step.</p></div>
-              </figure>
-            </section>
+            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · Interaction models</span><p>Overlay, page-level AI, and embedded panel at one workflow step.</p></div></figure></section>
 
-            <section class="case-study-section" id="case-responsive">
+            <section class="case-study-section" id="case-responsive"><div class="case-study-copy">
               <h3>The surface responds to available space.</h3>
               <p>Wide viewports use a resizable side panel beside the page. Narrow screens switch to full-screen; <code>/assistant</code> supports immersive work.</p>
               <p>The same conversation is intended to persist between modes.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Responsive states</span><p>Wide panel, narrow full-screen, and persistent thread.</p></div>
-              </figure>
-            </section>
+            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · Responsive states</span><p>Wide panel, narrow full-screen, and persistent thread.</p></div></figure></section>
 
-            <section class="case-study-section" id="case-context">
+            <section class="case-study-section" id="case-context"><div class="case-study-copy">
               <h3>Conversation state and page context are separate contracts.</h3>
               <p>The thread persists across routes; the current URL can inform page-aware prompts.</p>
               <p>Context payload, permissions, unsaved state, and fallbacks require technical and security validation. Persistent chat does not mean unrestricted page access.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Context flow</span><p>Persistent thread with page-aware prompt changes.</p></div>
-              </figure>
-            </section>
+            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · Context flow</span><p>Persistent thread with page-aware prompt changes.</p></div></figure></section>
 
-            <section class="case-study-section" id="case-platform">
+            <section class="case-study-section" id="case-platform"><div class="case-study-copy">
               <h3>Shared patterns support distinct AI surfaces.</h3>
               <p>The Assistant can host specialist widgets; focused tools such as summaries can stay within product pages.</p>
               <p>Shared UI patterns provide consistency while product teams own domain data and agents. The technical brief proposes routing requests through Amazon Bedrock.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · AI surfaces</span><p>Frame, Assistant, specialist widgets, page tools, and ownership.</p></div>
-              </figure>
-            </section>
+            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · AI surfaces</span><p>Frame, Assistant, specialist widgets, page tools, and ownership.</p></div></figure></section>
 
-            <section class="case-study-section" id="case-outcome">
+            <section class="case-study-section" id="case-outcome"><div class="case-study-copy">
               <h3>The redesign joins the frame and Assistant.</h3>
               <p>Global search, employee profile, inbox, navigation, and AI share a persistent product frame.</p>
               <p>Proposed measures include CSAT, weekly use, context loss, mode changes, task completion, support, and performance. Delivery and impact remain unverified.</p>
-              <figure class="case-study-image-placeholder">
-                <div><span>Image placeholder · Connected experience</span><p>Header, active page, navigation, and responsive Assistant.</p></div>
-              </figure>
-              <footer class="case-study-source-note">[Confirm role, dates, final scope, delivery, and outcomes.]</footer>
-            </section>
+            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · Connected experience</span><p>Header, active page, navigation, and responsive Assistant.</p></div></figure><footer class="case-study-source-note">[Confirm role, dates, final scope, delivery, and outcomes.]</footer></section>
           </article>
           <article class="case-study-article" data-case-study-project="2" hidden>
+            <header class="case-study-intro" id="customization-intro">
+              <h2>Personio, in your brand.</h2>
+              <p class="case-study-lede">Personio is part of the everyday employee experience. Customization settings let each company make that experience feel like an extension of its own brand.</p>
+              <p class="case-study-meta">2025 <span>·</span> Brand expression, product experience, accessibility</p>
+            </header>
+            <section class="case-study-section" id="customization-identity"><div class="case-study-copy">
+              <h3>A workplace product should feel like it belongs.</h3>
+              <p>Employees meet Personio through the rhythm of work: checking details, finding information, and completing everyday tasks. A familiar company identity makes that shared space feel closer to home.</p>
+            </div></section>
+            <section class="case-study-section" id="customization-controls"><div class="case-study-copy">
+              <h3>Make the product recognizably yours.</h3>
+              <p>Administrators can add their logo, choose an accent colour, and set the wallpaper from a selection of ready-made options or an image of their own.</p>
+              <p>Small choices build a consistent presence across the moments employees spend in Personio.</p>
+            </div></section>
+            <section class="case-study-section" id="customization-colour"><div class="case-study-copy">
+              <h3>Brand expression has to work across the whole product.</h3>
+              <p>A customer’s colour cannot be treated as decoration for one screen. It needs to carry through controls, navigation, and content while keeping hierarchy clear in both light and dark appearances.</p>
+              <p>The theming system translates a chosen brand colour into a considered range of tones, so the interface can express the brand without losing clarity.</p>
+            </div></section>
+            <section class="case-study-section" id="customization-accessibility"><div class="case-study-copy">
+              <h3>Customization comes with guardrails.</h3>
+              <p>People need to recognize actions, read content, and distinguish information at a glance—even when the palette changes. Accessibility and usability are part of the customization logic, not cleanup after it.</p>
+              <p>The result is a product that can feel personal while keeping familiar patterns and legible states consistent across its surfaces.</p>
+            </div></section>
+          </article>
+          <article class="case-study-article" data-case-study-project="1" hidden>
             <header class="case-study-intro" id="performance-intro">
               <h2>Performance works<br />in cycles.</h2>
               <p class="case-study-lede">Personio’s Performance suite served 1,400+ mid-market customers across Europe. The 2024 overhaul connected fragmented tools into a role-aware system for planning, running, and reviewing performance.</p>
@@ -207,62 +185,41 @@
             </header>
 
             <section class="case-study-section" id="performance-cycle">
-              <h3>The model starts with the work, not the feature.</h3>
-              <p>Performance moves through planning, reviewing, rewarding, and monitoring. The architecture treats those activities as a recurring cycle instead of a linear checklist.</p>
+              <div class="case-study-copy">
+                <h3>The model starts with the work, not the feature.</h3>
+                <p>Performance moves through planning, reviewing, rewarding, and monitoring. The architecture treats those activities as a recurring cycle instead of a linear checklist.</p>
+              </div>
             </section>
 
             <section class="case-study-section" id="performance-roles">
-              <h3>One cycle, four different scopes.</h3>
-              <p>Individual contributors, managers, org leaders, and HR managers carry different responsibilities.</p>
-              <p>The information architecture scales with that responsibility, surfacing more of the system as each role’s scope expands.</p>
+              <div class="case-study-copy">
+                <h3>One cycle, four different scopes.</h3>
+                <p>Individual contributors, managers, org leaders, and HR managers carry different responsibilities.</p>
+                <p>The information architecture scales with that responsibility, surfacing more of the system as each role’s scope expands.</p>
+              </div>
             </section>
 
             <section class="case-study-section" id="performance-experience">
-              <h3>A unified suite separates setup from participation.</h3>
-              <p>Four disconnected features became one Performance area, with dedicated spaces for overview, personal and team performance, review cycles, and management.</p>
-              <p>HR managers configure the process; employees and leaders take part through role-appropriate views.</p>
+              <div class="case-study-copy">
+                <h3>A unified suite separates setup from participation.</h3>
+                <p>Four disconnected features became one Performance area, with dedicated spaces for overview, personal and team performance, review cycles, and management.</p>
+                <p>HR managers configure the process; employees and leaders take part through role-appropriate views.</p>
+              </div>
             </section>
 
             <section class="case-study-section" id="performance-research">
-              <h3>The structure came from how HR teams work.</h3>
-              <p>Seventeen moderated card-sorting sessions with non-customer HR managers across the UK, Germany, and wider Europe explored how performance activities are planned, sequenced, and connected.</p>
+              <div class="case-study-copy">
+                <h3>The structure came from how HR teams work.</h3>
+                <p>Seventeen moderated card-sorting sessions with non-customer HR managers across the UK, Germany, and wider Europe explored how performance activities are planned, sequenced, and connected.</p>
+              </div>
             </section>
 
             <section class="case-study-section" id="performance-outcomes">
-              <h3>The architecture scaled beyond Performance.</h3>
-              <p>The scope-based pattern was adopted across 10 product areas; a separate summary cites the information architecture’s reuse across seven products.</p>
-              <p>The FY2024–25 results summary reports 124% NRR in Mid-market, UKI &amp; International and names Performance the #1 upsell product. The material does not attribute those outcomes solely to the redesign.</p>
-            </section>
-          </article>
-          <article class="case-study-article" data-case-study-project="3" hidden>
-            <header class="case-study-intro" id="customization-intro">
-              <h2>Personio, in your brand.</h2>
-              <p class="case-study-lede">Personio is part of the everyday employee experience. Customization settings let each company make that experience feel like an extension of its own brand.</p>
-              <p class="case-study-project-name">Personio Customization Settings <span>·</span> Design collaboration with Andru Dunn</p>
-              <p class="case-study-meta">2025 <span>·</span> Brand expression, product experience, accessibility</p>
-            </header>
-
-            <section class="case-study-section" id="customization-identity">
-              <h3>A workplace product should feel like it belongs.</h3>
-              <p>Employees meet Personio through the rhythm of work: checking details, finding information, and completing everyday tasks. A familiar company identity makes that shared space feel closer to home.</p>
-            </section>
-
-            <section class="case-study-section" id="customization-controls">
-              <h3>Make the product recognizably yours.</h3>
-              <p>Administrators can add their logo, choose an accent colour, and set the wallpaper from a selection of ready-made options or an image of their own.</p>
-              <p>Small choices build a consistent presence across the moments employees spend in Personio.</p>
-            </section>
-
-            <section class="case-study-section" id="customization-colour">
-              <h3>Brand expression has to work across the whole product.</h3>
-              <p>A customer’s colour cannot be treated as decoration for one screen. It needs to carry through controls, navigation, and content while keeping hierarchy clear in both light and dark appearances.</p>
-              <p>Andru’s theming work shaped the design principle: translate a chosen brand colour into a considered range of tones, so the interface can express the brand without losing clarity.</p>
-            </section>
-
-            <section class="case-study-section" id="customization-accessibility">
-              <h3>Customization comes with guardrails.</h3>
-              <p>People need to recognize actions, read content, and distinguish information at a glance—even when the palette changes. Accessibility and usability are part of the customization logic, not cleanup after it.</p>
-              <p>The result is a product that can feel personal while keeping familiar patterns and legible states consistent across its surfaces.</p>
+              <div class="case-study-copy">
+                <h3>The architecture scaled beyond Performance.</h3>
+                <p>The scope-based pattern was adopted across 10 product areas; a separate summary cites the information architecture’s reuse across seven products.</p>
+                <p>The FY2024–25 results summary reports 124% NRR in Mid-market, UKI &amp; International and names Performance the #1 upsell product. The material does not attribute those outcomes solely to the redesign.</p>
+              </div>
             </section>
           </article>
         </div>
@@ -305,7 +262,7 @@
       const projectControls = [...document.querySelectorAll("[data-project-control]")];
       const projectPreviewVideo = document.querySelector(".project-preview-video-first");
       const projectPreviewVideoSecond = document.querySelector(".project-preview-video-second");
-      const designSystemPreviewVideo = document.querySelector(".design-system-artwork");
+      const customizationPreviewVideo = document.querySelector(".customization-preview-video");
       const videoSegmentControls = [...document.querySelectorAll("[data-video-segment]")];
       const videoSegmentProgress = [...document.querySelectorAll("[data-video-progress]")];
       const previewCarousel = document.querySelector(".preview-carousel");
@@ -333,9 +290,9 @@
       let performanceImageFrame = null;
       const footerGlassControls = [...document.querySelectorAll(".footer-project-control, .case-study-close")];
       let caseStudyOpen = false;
+      let lastCaseStudyScrollTop = 0;
       const projects = [
-        { title: "Personio Responsive Intelligence", description: "App-frame redesign and embedded assistant", caseStudy: true },
-        { title: "Personio Design System", description: "Components, Foundations, and Product Architecture" },
+        { title: "Personio Responsive Intelligence", description: "App-frame redesign and embedded assistant", caseStudy: true, videoPreview: true },
         { title: "Performance overhaul", description: "Role-based architecture for a continuous cycle", caseStudy: true },
         { title: "Personio Customization Settings", description: "Make Personio feel like your brand", caseStudy: true },
       ];
@@ -373,7 +330,7 @@
 
       function updatePerformanceImageProgress(now) {
         performanceImageFrame = null;
-        if (caseStudyOpen || activeProject !== 2 || document.querySelector("#work").hidden || document.visibilityState !== "visible") return;
+        if (caseStudyOpen || activeProject !== 1 || document.querySelector("#work").hidden || document.visibilityState !== "visible") return;
         const elapsed = now - performanceImageStartedAt;
         if (elapsed >= performanceImageDuration) {
           selectPerformanceImage(activePerformanceImage + 1);
@@ -387,14 +344,17 @@
       }
 
       function syncPerformanceImageCarousel(reset = false) {
-        const shouldRun = !caseStudyOpen && activeProject === 2 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        const shouldRun = !caseStudyOpen && activeProject === 1 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        const wasRunning = performanceStage.classList.contains("has-performance-preview");
         performanceStage.classList.toggle("has-performance-preview", shouldRun);
-        if (shouldRun && performanceImageFrame !== null) return;
-        if (performanceImageFrame !== null) cancelAnimationFrame(performanceImageFrame);
-        performanceImageFrame = null;
-        if (!shouldRun) return;
-        if (reset) selectPerformanceImage(0);
-        else performanceImageStartedAt = performance.now();
+        if (!shouldRun) {
+          if (performanceImageFrame !== null) cancelAnimationFrame(performanceImageFrame);
+          performanceImageFrame = null;
+          return;
+        }
+        if (reset || !wasRunning) selectPerformanceImage(0);
+        if (performanceImageFrame !== null) return;
+        performanceImageStartedAt = performance.now();
         performanceImageFrame = requestAnimationFrame(updatePerformanceImageProgress);
       }
 
@@ -519,11 +479,11 @@
 
       function syncProjectPreview() {
         syncPerformanceImageCarousel();
-        const shouldShowVideo = activeProject === 0 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        const shouldShowVideo = projects[activeProject].videoPreview && !document.querySelector("#work").hidden && document.visibilityState === "visible";
         videoSegmentBar.classList.toggle("is-visible", shouldShowVideo);
-        const shouldShowDesignSystemVideo = activeProject === 1 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
-        if (shouldShowDesignSystemVideo) designSystemPreviewVideo.play().catch(() => {});
-        else designSystemPreviewVideo.pause();
+        const shouldShowCustomizationVideo = activeProject === 2 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        if (shouldShowCustomizationVideo) customizationPreviewVideo.play().catch(() => {});
+        else customizationPreviewVideo.pause();
         if (!shouldShowVideo) {
           projectPreviewVideo.pause();
           projectPreviewVideoSecond.pause();
@@ -609,7 +569,7 @@
       }
 
       function updateVideoSegmentProgress(now) {
-        if (lastProgressFrame !== null && activeProject === 0 && !document.querySelector("#work").hidden && document.visibilityState === "visible") {
+        if (lastProgressFrame !== null && projects[activeProject].videoPreview && !document.querySelector("#work").hidden && document.visibilityState === "visible") {
           const delta = (now - lastProgressFrame) / 1000;
           if (activeVideoSegment === 0 && !pendingSegmentSelection) {
             if (firstClipHasEnded) {
@@ -710,6 +670,19 @@
         });
       }
 
+      function updateCaseStudyMediaMotion(article = caseStudy.querySelector(".case-study-article:not([hidden])")) {
+        if (!article || !caseStudyOpen) return;
+        const scrollBounds = caseStudyScroll.getBoundingClientRect();
+        article.querySelectorAll(".case-study-section--media").forEach((section) => {
+          const sectionBounds = section.getBoundingClientRect();
+          const fadeDistance = Math.max(1, sectionBounds.height);
+          const progress = Math.min(1, Math.max(0, (scrollBounds.top - sectionBounds.top) / fadeDistance));
+          const image = section.querySelector(".case-study-media img");
+          if (!image) return;
+          image.style.setProperty("--media-opacity", (1 - progress).toFixed(3));
+        });
+      }
+
       function syncCaseStudyAnchorNav(article) {
         caseStudyAnchorNodes = [...article.querySelectorAll(":scope > .case-study-intro, :scope > .case-study-section")];
         caseStudyAnchorList.replaceChildren(...caseStudyAnchorNodes.map((anchor, index) => {
@@ -743,8 +716,12 @@
         caseStudy.setAttribute("aria-label", `${projects[activeProject].title} case study`);
         if (open) {
           caseStudyScroll.scrollTop = 0;
+          lastCaseStudyScrollTop = 0;
+          caseStudyScroll.dataset.scrollDirection = "down";
           caseStudy.style.setProperty("--case-study-tint", ".80");
-          syncCaseStudyAnchorNav(caseStudy.querySelector(".case-study-article:not([hidden])"));
+          const currentArticle = caseStudy.querySelector(".case-study-article:not([hidden])");
+          syncCaseStudyAnchorNav(currentArticle);
+          updateCaseStudyMediaMotion(currentArticle);
         } else {
           document.querySelector(`.preview[data-project-index="${activeProject}"]`).focus?.({ preventScroll: true });
         }
@@ -752,6 +729,11 @@
       }
       caseStudyScroll.addEventListener("scroll", () => {
         if (!caseStudyOpen) return;
+        const currentScrollTop = caseStudyScroll.scrollTop;
+        if (currentScrollTop !== lastCaseStudyScrollTop) {
+          caseStudyScroll.dataset.scrollDirection = currentScrollTop > lastCaseStudyScrollTop ? "down" : "up";
+          lastCaseStudyScrollTop = currentScrollTop;
+        }
         const currentArticle = caseStudy.querySelector(".case-study-article:not([hidden])");
         if (!currentArticle) return;
         const secondAnchor = currentArticle.querySelector(".case-study-section");
@@ -761,6 +743,7 @@
         const tintOpacity = .80 + progress * .16;
         caseStudy.style.setProperty("--case-study-tint", tintOpacity.toFixed(3));
         updateCaseStudyAnchorNav();
+        updateCaseStudyMediaMotion(currentArticle);
       }, { passive: true });
       let suppressPreviewClick = false;
       let previewTouchStart = null;
@@ -880,16 +863,16 @@
           if (activeProject === 0 && !caseStudyOpen) setCaseStudyOpen(true);
         }
       });
+      document.querySelector('.preview[data-project-index="1"]').addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
+          event.preventDefault();
+          if (activeProject === 1 && !caseStudyOpen) setCaseStudyOpen(true);
+        }
+      });
       document.querySelector('.preview[data-project-index="2"]').addEventListener("keydown", (event) => {
         if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
           event.preventDefault();
           if (activeProject === 2 && !caseStudyOpen) setCaseStudyOpen(true);
-        }
-      });
-      document.querySelector('.preview[data-project-index="3"]').addEventListener("keydown", (event) => {
-        if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
-          event.preventDefault();
-          if (activeProject === 3 && !caseStudyOpen) setCaseStudyOpen(true);
         }
       });
       document.addEventListener("keydown", (event) => {
@@ -990,6 +973,16 @@
         document.querySelector("[data-project-footer]").hidden = selectedPage !== "work";
         updateBandMetrics();
         syncProjectPreview();
+        if (selectedPage === "work") {
+          previewCarousel.classList.add("is-recentering");
+          requestAnimationFrame(() => {
+            updateBandMetrics();
+            const activeSlide = projectBand.querySelector(`.project-slide[data-project-index="${activeProject}"]`);
+            if (activeSlide) centerProjectSlide(activeSlide, "auto");
+            syncProjectPreview();
+            requestAnimationFrame(() => previewCarousel.classList.remove("is-recentering"));
+          });
+        }
         if (updateHistory && window.location.hash !== `#${selectedPage}`) {
           window.history.pushState({ page: selectedPage }, "", `#${selectedPage}`);
         }
@@ -1001,10 +994,10 @@
       }));
       window.addEventListener("popstate", () => {
         const page = window.location.hash.slice(1);
-        showPage(["work", "about", "love"].includes(page) ? page : "work", false);
+        showPage(["work", "about"].includes(page) ? page : "work", false);
       });
       const initialPage = window.location.hash.slice(1);
-      showPage(["work", "about", "love"].includes(initialPage) ? initialPage : "work", false);
+      showPage(["work", "about"].includes(initialPage) ? initialPage : "work", false);
       window.addEventListener("resize", updateBandMetrics);
     </script>
   </body>
