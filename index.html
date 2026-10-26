@@ -70,14 +70,14 @@
               </div>
             </div>
             <div class="video-segments project-video-segments" role="group" aria-label="Personio preview video segments" data-video-segments>
-              <button class="video-segment is-active" type="button" aria-label="Play preview video 1" aria-pressed="true" data-video-segment="0"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="0"></span></span></button>
-              <button class="video-segment" type="button" aria-label="Play preview video 2" aria-pressed="false" data-video-segment="1"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="1"></span></span></button>
+              <button class="video-segment project-video-segment project-video-segment-active" type="button" aria-label="Play preview video 1" aria-pressed="true" data-video-segment="0"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="0"></span></span></button>
+              <button class="video-segment project-video-segment" type="button" aria-label="Play preview video 2" aria-pressed="false" data-video-segment="1"><span class="video-segment-track"><span class="video-segment-progress" data-video-progress="1"></span></span></button>
             </div>
-            <div class="video-segments performance-image-segments" role="group" aria-label="Performance screenshots">
-              <button class="video-segment is-active" type="button" aria-label="Show performance screenshot 1" aria-pressed="true" data-performance-image="0"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="0"></span></span></button>
-              <button class="video-segment" type="button" aria-label="Show performance screenshot 2" aria-pressed="false" data-performance-image="1"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="1"></span></span></button>
-              <button class="video-segment" type="button" aria-label="Show performance screenshot 3" aria-pressed="false" data-performance-image="2"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="2"></span></span></button>
-              <button class="video-segment" type="button" aria-label="Show performance screenshot 4" aria-pressed="false" data-performance-image="3"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="3"></span></span></button>
+            <div class="video-segments performance-image-segments" role="group" aria-label="Performance screenshots" data-performance-image-segments>
+              <button class="video-segment performance-image-segment performance-image-segment-active" type="button" aria-label="Show performance screenshot 1" aria-pressed="true" data-performance-image="0"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="0"></span></span></button>
+              <button class="video-segment performance-image-segment" type="button" aria-label="Show performance screenshot 2" aria-pressed="false" data-performance-image="1"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="1"></span></span></button>
+              <button class="video-segment performance-image-segment" type="button" aria-label="Show performance screenshot 3" aria-pressed="false" data-performance-image="2"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="2"></span></span></button>
+              <button class="video-segment performance-image-segment" type="button" aria-label="Show performance screenshot 4" aria-pressed="false" data-performance-image="3"><span class="video-segment-track"><span class="video-segment-progress" data-performance-image-progress="3"></span></span></button>
             </div>
           </div>
         </section>
@@ -271,8 +271,9 @@
       const projectPreviewVideo = document.querySelector(".project-preview-video-first");
       const projectPreviewVideoSecond = document.querySelector(".project-preview-video-second");
       const customizationPreviewVideo = document.querySelector(".customization-preview-video");
-      const videoSegmentControls = [...document.querySelectorAll("[data-video-segment]")];
-      const videoSegmentProgress = [...document.querySelectorAll("[data-video-progress]")];
+      const videoSegmentBar = document.querySelector("[data-video-segments]");
+      const videoSegmentControls = [...videoSegmentBar.querySelectorAll("[data-video-segment]")];
+      const videoSegmentProgress = [...videoSegmentBar.querySelectorAll("[data-video-progress]")];
       const previewCarousel = document.querySelector(".preview-carousel");
       const projectBand = document.querySelector(".project-band");
       const caseStudy = document.querySelector(".case-study");
@@ -284,8 +285,9 @@
       let caseStudyAnchorNodes = [];
       const performanceImage = document.querySelector("[data-performance-image-current]");
       const performanceStage = document.querySelector(".stage");
-      const performanceImageControls = [...document.querySelectorAll("[data-performance-image]")];
-      const performanceImageProgress = [...document.querySelectorAll("[data-performance-image-progress]")];
+      const performanceImageSegmentBar = document.querySelector("[data-performance-image-segments]");
+      const performanceImageControls = [...performanceImageSegmentBar.querySelectorAll("[data-performance-image]")];
+      const performanceImageProgress = [...performanceImageSegmentBar.querySelectorAll("[data-performance-image-progress]")];
       const performanceImageSources = [1, 2, 3, 4].map((number) => `assets/performance-0${number}.png`);
       const performanceImageAlts = [
         "Performance overview with personal tasks, direct reports, and review cycles.",
@@ -322,6 +324,7 @@
       let segmentElapsed = 0;
       let firstClipHasEnded = false;
       let segmentControlHovered = false;
+      let videoProgressFrame = null;
       let activePreviewVideo = projectPreviewVideo;
       let pendingSegmentSelection = false;
       let segmentSelectionId = 0;
@@ -334,7 +337,7 @@
         performanceImage.alt = performanceImageAlts[activePerformanceImage];
         performanceImageControls.forEach((control, controlIndex) => {
           const isActive = controlIndex === activePerformanceImage;
-          control.classList.toggle("is-active", isActive);
+          control.classList.toggle("performance-image-segment-active", isActive);
           control.setAttribute("aria-pressed", String(isActive));
         });
         if (restart) {
@@ -377,6 +380,17 @@
         if (reset || !wasRunning) selectPerformanceImage(0);
         if (performanceImageFrame !== null) return;
         performanceImageFrame = requestAnimationFrame(updatePerformanceImageProgress);
+      }
+
+      function syncVideoSegmentProgress() {
+        const shouldRun = activeProject === 0 && !caseStudyOpen && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        if (!shouldRun) {
+          if (videoProgressFrame !== null) cancelAnimationFrame(videoProgressFrame);
+          videoProgressFrame = null;
+          lastProgressFrame = null;
+          return;
+        }
+        if (videoProgressFrame === null) videoProgressFrame = requestAnimationFrame(updateVideoSegmentProgress);
       }
 
       performanceImageControls.forEach((control) => {
@@ -500,7 +514,8 @@
 
       function syncProjectPreview() {
         syncPerformanceImageCarousel();
-        const shouldShowVideo = projects[activeProject].videoPreview && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        syncVideoSegmentProgress();
+        const shouldShowVideo = projects[activeProject].videoPreview && !caseStudyOpen && !document.querySelector("#work").hidden && document.visibilityState === "visible";
         videoSegmentBar.classList.toggle("is-visible", shouldShowVideo);
         const shouldShowCustomizationVideo = activeProject === 2 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
         if (shouldShowCustomizationVideo) customizationPreviewVideo.play().catch(() => {});
@@ -536,7 +551,7 @@
       function updateVideoSegmentControls() {
         videoSegmentControls.forEach((control, index) => {
           const isActive = index === activeVideoSegment;
-          control.classList.toggle("is-active", isActive);
+          control.classList.toggle("project-video-segment-active", isActive);
           control.setAttribute("aria-pressed", String(isActive));
         });
       }
@@ -590,6 +605,11 @@
       }
 
       function updateVideoSegmentProgress(now) {
+        videoProgressFrame = null;
+        if (activeProject !== 0 || caseStudyOpen || document.querySelector("#work").hidden || document.visibilityState !== "visible") {
+          lastProgressFrame = null;
+          return;
+        }
         if (lastProgressFrame !== null && projects[activeProject].videoPreview && !document.querySelector("#work").hidden && document.visibilityState === "visible") {
           const delta = (now - lastProgressFrame) / 1000;
           if (activeVideoSegment === 0 && !pendingSegmentSelection) {
@@ -623,13 +643,12 @@
           const elapsed = index < activeVideoSegment ? (duration || 0) : index === activeVideoSegment ? segmentElapsed : 0;
           fill.style.transform = `scaleX(${duration ? Math.min(1, elapsed / duration) : 0})`;
         });
-        requestAnimationFrame(updateVideoSegmentProgress);
+        videoProgressFrame = requestAnimationFrame(updateVideoSegmentProgress);
       }
 
       videoSegmentControls.forEach((control) => {
         control.addEventListener("click", () => selectVideoSegment(Number(control.dataset.videoSegment)));
       });
-      const videoSegmentBar = document.querySelector("[data-video-segments]");
       videoSegmentBar.addEventListener("pointerenter", () => {
         segmentControlHovered = true;
         syncProjectPreview();
@@ -649,7 +668,7 @@
       projectPreviewVideoSecond.addEventListener("ended", () => {
         if (activeVideoSegment === 1) lastProgressVideoTime = projectPreviewVideoSecond.currentTime;
       });
-      requestAnimationFrame(updateVideoSegmentProgress);
+      syncVideoSegmentProgress();
 
       document.querySelector(".project-step-previous").addEventListener("click", () => showProject(-1));
       document.querySelector(".project-step-next").addEventListener("click", () => showProject(1));

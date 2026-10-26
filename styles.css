@@ -311,7 +311,8 @@ button, a { font: inherit; }
   cursor: pointer;
   transition: flex-grow 380ms cubic-bezier(.22, 1, .36, 1);
 }
-.video-segment.is-active { flex-grow: 4; }
+.project-video-segment-active,
+.performance-image-segment-active { flex-grow: 4; }
 .video-segment-track {
   position: relative;
   display: block;
