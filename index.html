@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Alex Guerrero — Systems and Product Designer in Madrid." />
-    <title>Alex Guerrero — Systems and Product Designer</title>
+    <title>Alex Guerrero | Design Engineer</title>
+    <link rel="icon" type="image/png" href="assets/performance-01.png" />
+    <script>
+      const updateTabTitle = () => {
+        document.title = document.visibilityState === "visible"
+          ? "Say hi"
+          : "Alex Guerrero | Design Engineer";
+      };
+      updateTabTitle();
+      document.addEventListener("visibilitychange", updateTabTitle);
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -285,7 +295,8 @@
       ];
       const performanceImageDuration = 10000;
       let activePerformanceImage = 0;
-      let performanceImageStartedAt = 0;
+      let performanceImageElapsed = 0;
+      let performanceImageLastFrame = null;
       let performanceImageFrame = null;
       const footerGlassControls = [...document.querySelectorAll(".footer-project-control, .case-study-close")];
       let caseStudyOpen = false;
@@ -326,7 +337,10 @@
           control.classList.toggle("is-active", isActive);
           control.setAttribute("aria-pressed", String(isActive));
         });
-        if (restart) performanceImageStartedAt = performance.now();
+        if (restart) {
+          performanceImageElapsed = 0;
+          performanceImageLastFrame = null;
+        }
         performanceImageProgress.forEach((fill, fillIndex) => {
           fill.style.transform = `scaleX(${fillIndex < activePerformanceImage ? 1 : 0})`;
         });
@@ -335,11 +349,14 @@
       function updatePerformanceImageProgress(now) {
         performanceImageFrame = null;
         if (caseStudyOpen || activeProject !== 1 || document.querySelector("#work").hidden || document.visibilityState !== "visible") return;
-        const elapsed = now - performanceImageStartedAt;
-        if (elapsed >= performanceImageDuration) {
+        if (performanceImageLastFrame === null) performanceImageLastFrame = now;
+        else performanceImageElapsed += Math.max(0, now - performanceImageLastFrame);
+        performanceImageLastFrame = now;
+        if (performanceImageElapsed >= performanceImageDuration) {
           selectPerformanceImage(activePerformanceImage + 1);
+          performanceImageLastFrame = now;
         }
-        const progress = Math.min(1, Math.max(0, (now - performanceImageStartedAt) / performanceImageDuration));
+        const progress = Math.min(1, performanceImageElapsed / performanceImageDuration);
         performanceImageProgress.forEach((fill, index) => {
           const value = index < activePerformanceImage ? 1 : index === activePerformanceImage ? progress : 0;
           fill.style.transform = `scaleX(${value})`;
@@ -354,11 +371,11 @@
         if (!shouldRun) {
           if (performanceImageFrame !== null) cancelAnimationFrame(performanceImageFrame);
           performanceImageFrame = null;
+          performanceImageLastFrame = null;
           return;
         }
         if (reset || !wasRunning) selectPerformanceImage(0);
         if (performanceImageFrame !== null) return;
-        performanceImageStartedAt = performance.now();
         performanceImageFrame = requestAnimationFrame(updatePerformanceImageProgress);
       }
 
