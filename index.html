@@ -102,7 +102,7 @@
                 <h3>A competition for real estate.</h3>
                 <p>The overlay separated assistance from the work it was meant to support. It covered page context and controls users needed to evaluate guidance and act on it, undermining the Assistant’s value. Its fixed interaction model also did not scale across workflows or screen sizes.</p>
               </div>
-              <figure class="case-study-media"><img src="assets/assistant-overlay.png" alt="Analytics workspace with the Assistant open in a side panel." /></figure>
+              <figure class="case-study-media"><img src="assets/assistant-covering.png" alt="Analytics workspace with the Assistant open over the report." /></figure>
             </section>
 
             <section class="case-study-section case-study-section--media" id="case-research">
@@ -111,14 +111,14 @@
                 <p>During Q2, we interviewed Personio’s Co-Creation Council about real workflows. They lost context during employee changes; in Analytics, conversations reset and report templates were hard to find.</p>
                 <p>The Assistant needed to stay anchored to the page and task.</p>
               </div>
-              <figure class="case-study-media"><img src="assets/assistant-employee-change.png" alt="Employee promotion details form with the Assistant open alongside it." /></figure>
+              <figure class="case-study-media"><img src="assets/assistant-covering-2.png" alt="Employee promotion details page with the Assistant open alongside the form." /></figure>
             </section>
 
-            <section class="case-study-section" id="case-frame"><div class="case-study-copy">
+            <section class="case-study-section case-study-section--media" id="case-frame"><div class="case-study-copy">
               <h3>The frame makes core actions easier to reach.</h3>
               <p>Global search moves beyond Home into the header; the employee profile and inbox entry points gain prominence there too.</p>
               <p>These persistent controls establish orientation while the Assistant stays available beside the active product page.</p>
-            </div><figure class="case-study-image-placeholder"><div><span>Image placeholder · New header</span><p>Search, employee profile, inbox, navigation, and Assistant entry.</p></div></figure></section>
+            </div><figure class="case-study-media"><img src="assets/personio-top-actions.png" alt="Personio organization page with global search in the header and Assistant, inbox, and profile actions at the top." /></figure></section>
 
             <section class="case-study-section" id="case-options"><div class="case-study-copy">
               <h3>One interaction model had to serve the whole workflow.</h3>
@@ -272,6 +272,7 @@
       const caseStudyClose = document.querySelector("[data-case-study-close]");
       const caseStudyScroll = caseStudy.querySelector(".case-study-scroll");
       const caseStudyAnchorList = caseStudy.querySelector("[data-case-study-anchor-list]");
+      const projectFooter = document.querySelector("[data-project-footer]");
       let caseStudyAnchorNodes = [];
       const performanceImage = document.querySelector("[data-performance-image-current]");
       const performanceStage = document.querySelector(".stage");
@@ -291,6 +292,11 @@
       const footerGlassControls = [...document.querySelectorAll(".footer-project-control, .case-study-close")];
       let caseStudyOpen = false;
       let lastCaseStudyScrollTop = 0;
+      function updateCaseStudyFooterClearance() {
+        const footerHeight = projectFooter.getBoundingClientRect().height || 107;
+        caseStudy.style.setProperty("--case-study-footer-clearance", `${Math.ceil(footerHeight + 32)}px`);
+      }
+      new ResizeObserver(updateCaseStudyFooterClearance).observe(projectFooter);
       const projects = [
         { title: "Personio Responsive Intelligence", description: "App-frame redesign and embedded assistant", caseStudy: true, videoPreview: true },
         { title: "Performance overhaul", description: "Role-based architecture for a continuous cycle", caseStudy: true },
@@ -675,11 +681,11 @@
         const scrollBounds = caseStudyScroll.getBoundingClientRect();
         article.querySelectorAll(".case-study-section--media").forEach((section) => {
           const sectionBounds = section.getBoundingClientRect();
-          const fadeDistance = Math.max(1, sectionBounds.height);
-          const progress = Math.min(1, Math.max(0, (scrollBounds.top - sectionBounds.top) / fadeDistance));
+          const progress = Math.min(1, Math.max(0, (scrollBounds.top - sectionBounds.top) / Math.max(1, sectionBounds.height)));
           const image = section.querySelector(".case-study-media img");
-          if (!image) return;
-          image.style.setProperty("--media-opacity", (1 - progress).toFixed(3));
+          const fadeProgress = Math.min(1, Math.max(0, (progress - 0.72) / 0.28));
+          const easedFade = fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+          if (image) image.style.setProperty("--media-opacity", (1 - easedFade).toFixed(3));
         });
       }
 
@@ -703,6 +709,7 @@
 
       function setCaseStudyOpen(open) {
         caseStudyOpen = open;
+        updateCaseStudyFooterClearance();
         document.body.classList.toggle("case-study-open", open);
         caseStudy.classList.toggle("is-open", open);
         caseStudy.setAttribute("aria-hidden", String(!open));
