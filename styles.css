@@ -296,8 +296,9 @@ button, a { font: inherit; }
   gap: 4px;
   transform: translateX(-50%);
 }
+.video-segments[hidden] { display: none !important; }
 .project-video-segments,
-.performance-image-segments { top: calc(50% + min(19vw, 36vh, 455px) + 18px); left: 50%; visibility: hidden; opacity: 0; pointer-events: none; transform: translateX(-50%); transition: opacity 220ms ease, visibility 220ms; }
+.performance-image-segments { top: calc(50% + min(19vw, 36vh, 455px) + 18px); left: 50%; visibility: hidden; opacity: 0; pointer-events: none; transform: translateX(-50%); transition: opacity 220ms ease; }
 .project-video-segments { width: min(132px, 38vw); }
 .project-video-segments.is-visible,
 .stage.has-performance-preview .performance-image-segments { visibility: visible; opacity: 1; pointer-events: auto; }

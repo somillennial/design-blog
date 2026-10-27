@@ -58,7 +58,7 @@
                   <div class="preview has-animation" data-project-index="0" role="group" tabindex="0" aria-label="Personio Responsive Intelligence project preview. Press Enter to open case study.">
                     <span class="preview-index" aria-hidden="true">01</span>
                     <video class="project-preview-video project-preview-video-first" src="assets/personio-responsive-intelligence.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
-                    <video class="project-preview-video project-preview-video-second" src="assets/personio-responsive-intelligence-02.mp4" muted playsinline preload="none" aria-hidden="true"></video>
+                    <video class="project-preview-video project-preview-video-second" src="assets/personio-responsive-intelligence-02.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
                     <div class="preview-art art-personio" aria-hidden="true"><div class="art-panel"><span class="art-kicker">PERSONIO</span><span class="art-line"></span><span class="art-line short"></span><span class="art-button"></span></div><div class="art-side"><i></i><i></i><i></i></div></div>
                   </div>
                 </article>
@@ -521,7 +521,10 @@
         syncVideoSegmentProgress();
         const shouldShowVideo = projects[activeProject].videoPreview && !caseStudyOpen && !document.querySelector("#work").hidden && document.visibilityState === "visible";
         videoSegmentBar.classList.toggle("is-visible", shouldShowVideo);
+        videoSegmentBar.hidden = !shouldShowVideo;
         const shouldShowCustomizationVideo = activeProject === 2 && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        const shouldShowPerformanceSegments = activeProject === 1 && !caseStudyOpen && !document.querySelector("#work").hidden && document.visibilityState === "visible";
+        performanceImageSegmentBar.hidden = !shouldShowPerformanceSegments;
         if (shouldShowCustomizationVideo) customizationPreviewVideo.play().catch(() => {});
         else customizationPreviewVideo.pause();
         if (!shouldShowVideo) {
