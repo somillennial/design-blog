@@ -195,8 +195,8 @@ button, a { font: inherit; }
 .case-study-open .project-footer { position: relative; z-index: 6; }
 .case-study-open .project-footer-controls { visibility: hidden; }
 .case-study-close { display: none; }
-.case-study-open .project-meta h1 { color: #eeeeec; }
-.case-study-open .project-meta p { color: #b5b3ad; }
+.case-study-open .project-meta-title { color: #eeeeec; }
+.case-study-open .project-meta-description { color: #b5b3ad; }
 .case-study-open .case-study-close { --highlight-x: 0px; --highlight-y: 0px; --highlight-opacity: .28; position: fixed; z-index: 7; right: var(--page-inset); bottom: var(--page-inset); display: inline-flex; min-width: 76px; height: 44px; align-items: center; justify-content: center; padding: 0 15px; overflow: hidden; border: 0; border-radius: 999px; background: radial-gradient(83.33% 150% at 50% 50%, rgba(244,244,244,.04) 0%, rgba(0,0,0,0) 100%); color: #eeeeec; box-shadow: 0 0 8px 2px rgba(255,255,255,.05) inset, 0 0 .5px 0 rgba(0,0,0,.4), 0 1px 4px 0 rgba(0,0,0,.4); font-size: var(--ts-base); line-height: 24px; font-weight: 500; letter-spacing: var(--tr-base); cursor: pointer; transition: filter 160ms ease; }
 .case-study-open .case-study-close::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--highlight-opacity); box-shadow: .5px .5px 1px rgba(255,255,255,.72) inset; mask-image: radial-gradient(circle 32px at var(--highlight-x) var(--highlight-y), #000 0%, transparent 100%); transition: opacity 100ms ease; }
 .case-study-open .case-study-close:hover { filter: brightness(1.12); }
@@ -265,7 +265,9 @@ button, a { font: inherit; }
   background: var(--bg-subtle);
   border-radius: 24px;
   transition: background-color 260ms ease;
+  cursor: pointer;
 }
+.preview-carousel.is-dragging .preview { cursor: grabbing; }
 .preview.customization-preview { background: #17141b; }
 .project-preview-video {
   position: absolute;
@@ -431,6 +433,8 @@ button, a { font: inherit; }
 .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: var(--page-inset); }
 .project-footer[hidden] { display: none; }
 .project-footer-controls { display: flex; flex: none; gap: 8px; }
+.project-meta { display: grid; min-width: 0; justify-items: start; padding: 0; border: 0; background: transparent; color: var(--text-primary); text-align: left; cursor: pointer; }
+.project-meta:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 5px; border-radius: 2px; }
 .footer-project-control {
   --highlight-x: 0px;
   --highlight-y: 0px;
@@ -453,8 +457,8 @@ button, a { font: inherit; }
 .footer-project-control:hover { filter: brightness(1.12); }
 .footer-project-control:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 3px; }
 .footer-project-control svg { display: block; width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; shape-rendering: geometricPrecision; }
-.project-meta h1 { margin: 0; font-size: var(--ts-base); line-height: 24px; font-weight: 500; letter-spacing: var(--tr-base); }
-.project-meta p { margin: 3px 0 0; color: var(--text-secondary); font-size: var(--ts-base); line-height: 24px; }
+.project-meta-title { font-size: var(--ts-base); line-height: 24px; font-weight: 500; letter-spacing: var(--tr-base); }
+.project-meta-description { margin-top: 3px; color: var(--text-secondary); font-size: var(--ts-base); line-height: 24px; }
 
 .text-page { width: min(100%, 600px); justify-self: center; align-self: center; display: grid; gap: var(--about-intro-gap); }
 .about-page { display: grid; align-items: center; min-height: 100%; }
@@ -477,7 +481,7 @@ button, a { font: inherit; }
   .section-nav { width: 100%; justify-content: flex-start; gap: 12px; }
   .project-footer { gap: 12px; }
   .project-meta { min-width: 0; }
-  .project-meta h1, .project-meta p { font-size: var(--ts-sm); }
+  .project-meta-title, .project-meta-description { font-size: var(--ts-sm); }
   .preview-carousel { --preview-slide-width: min(calc(100vw - 64px), 84vw, calc(58vh * 1.580681)); }
   .project-video-segments, .performance-image-segments { top: calc(50% + min(26.6vw, 29vh) + 14px); }
   .text-page h1 { font-size: var(--ts-xl); }

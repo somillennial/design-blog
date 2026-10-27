@@ -237,10 +237,10 @@
       </section>
 
       <footer class="project-footer" data-project-footer>
-        <div class="project-meta">
-          <h1>Personio Responsive Intelligence</h1>
-          <p>App-frame redesign and embedded assistant</p>
-        </div>
+        <button class="project-meta" type="button">
+          <span class="project-meta-title">Personio Responsive Intelligence</span>
+          <span class="project-meta-description">App-frame redesign and embedded assistant</span>
+        </button>
         <div class="project-footer-controls" aria-label="Project navigation" data-footer-navigation>
           <button class="footer-project-control" type="button" aria-label="Previous project" data-project-direction="previous">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
@@ -431,9 +431,13 @@
       function updateProjectDetails(index) {
         activeProject = index;
         const project = projects[activeProject];
-        document.querySelector(".project-meta h1").textContent = project.title;
-        document.querySelector(".project-meta p").textContent = project.description;
+        document.querySelector(".project-meta-title").textContent = project.title;
+        document.querySelector(".project-meta-description").textContent = project.description;
       }
+
+      document.querySelector(".project-meta").addEventListener("click", () => {
+        if (projects[activeProject].caseStudy && !caseStudyOpen) setCaseStudyOpen(true);
+      });
 
       function updateBandMetrics() {
         const cardWidth = projectBand.firstElementChild.offsetWidth;
